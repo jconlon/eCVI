@@ -502,25 +502,10 @@ adding constraints such as lists or patterns of valid values. More
 complex data types can be created by listing elements and attributes or
 by extension of existing complex types adding elements or attributes.
 
-This snippet of XML schema defines an element named E. That element must
-contain two child elements A and B as well as two attributes c and d.
+This snippet of XML schema defines an element named `E`. That element must
+contain two child elements `A` and `B` as well as two attributes `c` and `d`.
 The names of the elements in the schema itself—starting with xs:-- are
-what tell the computer (parser) what E, A, B, c, and d _are_.
-
-```xml
-<xs:element name = "E" >
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name = "A" />
-      <xs:element name = "B" />
-    </xs:sequence>
-    <xs:attribute name = "c" />
-    <xs:attribute name = "d" />
-  </xs:complexType>
-</xs:element>
-```
-
-EDITOR NOTE: Shouldn't the above include types?
+what tell the computer (parser) what `E`, `A`, `B`, `c`, and `d` _are_.
 
 ```xml
 <xs:element name="E">
@@ -537,9 +522,9 @@ EDITOR NOTE: Shouldn't the above include types?
 ```
 
 The next box has three examples of XML document content. They are all
-element E but only the first one is a valid example of what is defined
-in the schema above. The second one is missing the element B. The third
-one has an extra attribute f.
+element `E` but only the first one is a valid example of what is defined
+in the schema above. The second one is missing the element `B`. The third
+one has an extra attribute `f`.
 
 ```xml
 <E c="1" d="2">
@@ -570,12 +555,12 @@ can go here.” Many power-user tools and programming languages include a
 much more powerful way of defining pattern matching. Regular Expressions
 (RegEx) are strings of characters and special characters that divide
 candidate strings into those that match and those that don’t. For
-example, \\d{2}\[A-Z\]{2}\\d{4} matches NEUS8 tag values—two digits, two
+example, `\d{2}[A-Z]{2}\d{4}` matches NEUS8 tag values—two digits, two
 capital letters, and four digits—but no other strings.
 
 To define and test new regular expressions takes some skill and
 practice. Even reading more complex regular expressions is not always
-easy. The eCVI standard includes xs:documentation elements in the
+easy. The eCVI standard includes `xs:documentation` elements in the
 definitions of all the types that use regular expressions in their
 definitions. I explain the regular expressions used in the standard at
 the end of this guide.
@@ -594,8 +579,8 @@ special characters.
 
 XML entities start with the ampersand (&) character and end with a
 semicolon. In between is coding that tells what character is being
-replaced. For example, our “\<” would be \&lt; (for less than). The
-ampersand itself would be \&amp; so we wouldn’t confuse it with the
+replaced. For example, our “<” would be `&lt;` (for less than). The
+ampersand itself would be `&amp;` so we wouldn’t confuse it with the
 start of another entity.
 
 Your favorite XML book will have much more to say about entities and
@@ -683,8 +668,8 @@ like this:
 ```
 
 This snippet includes one Animal element from a fictional eCVI. The
-Animal element has attributes for Age, Breed, Sex, and InspectionDate.
-It has included elements for a list of AnimalTags. We only have one tag
+Animal element has attributes for `Age`, `Breed`, `Sex`, and `InspectionDate`.
+It has included elements for a list of `AnimalTags`. We only have one tag
 in this example, but it allows for more. It also has one Test and two
 Vaccination elements. The details don’t matter now, we’ll tiptoe through
 all these tags in a later detailed chapter.
@@ -700,25 +685,37 @@ reference. They are defined as types when usage may vary between
 elements.
 
 Extracts of the actual schema will also show in boxes. A giveaway that
-you are looking at schema is all the xs: prefixes. Our schema creates an
-abbreviation xs: for the namespace “http://www.w3.org/2001/XMLSchema” so
+you are looking at schema is all the `xs:` prefixes. Our schema creates an
+abbreviation `xs:` for the namespace `“http://www.w3.org/2001/XMLSchema”` so
 you can tell that the names that follow are part of the schema language
 rather than something the workgroup made up. Here W3C made up the name
 element but the workgroup made up the name PremId.
 
 ```xml
-<xs:complexType name = "PremType" > <xs:annotation> <xs:documentation> PremType is used for origin and destination, and must be actual physical … </xs:documentation> </xs:annotation> <xs:sequence> <xs:element name = "PremId" type = "PremIdType " /> <xs:element name = "PremName" type = "xs:string " /> <xs:element name = "Address" type = "USAddress " /> <xs:element ref = "StateZoneOrAreaStatus" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "HerdOrFlockStatus" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Person" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> </xs:complexType>
+<xs:complexType name = "PremType">
+  <xs:annotation>
+    <xs:documentation> PremType is used for origin and destination, and must be actual physical … </xs:documentation>
+  </xs:annotation>
+  <xs:sequence>
+    <xs:element name = "PremId" type = "PremIdType " />
+    <xs:element name = "PremName" type = "xs:string " />
+    <xs:element name = "Address" type = "USAddress " />
+    <xs:element ref = "StateZoneOrAreaStatus" minOccurs = "0" maxOccurs = "unbounded" />
+    <xs:element ref = "HerdOrFlockStatus" minOccurs = "0" maxOccurs = "unbounded" />
+    <xs:element ref = "Person" minOccurs = "0" maxOccurs = "unbounded" />
+  </xs:sequence>
+</xs:complexType>
 ```
 
-Here the definition of a PremType includes PremId, PremName, and Address
-defined here based on two locally defined types (PremIdType and
-USAddress) and one XML type xs:string. It includes three more elements
-by reference to elements defined by themselves (StateZoneOrAreaStatus,
-HerdOrFlockStatus, and Person). Again, don’t worry about the details
+Here the definition of a `PremType` includes `PremId`, `PremName`, and `Address`
+defined here based on two locally defined types (`PremIdType` and
+`USAddress`) and one XML type `xs:string`. It includes three more elements
+by reference to elements defined by themselves (`StateZoneOrAreaStatus`,
+`HerdOrFlockStatus`, and `Person`). Again, don’t worry about the details
 now. Just know that you will see different styles for defining elements
 and there is _usually_ a logical reason for the choice.
 
-Notice the xs:documentation element in the example above. The standard
+Notice the `xs:documentation` element in the example above. The standard
 schema includes many of these elements. They have no effect on document
 validation but provide guidance on the intended usage of the elements
 they are contained in. I have removed these documentation elements from
@@ -817,9 +814,9 @@ useful additions to the standard eCVI.
 ### Root Document Elements
 
 Until version 3.0, the standard schema included only one root document
-element eCVI. Version three added two additional document types,
-Movement for documentation of generic animal movement not involving
-veterinary certification, and Sighting for documentation of an animal’s
+element `eCVI`. Version three added two additional document types,
+`Movement` for documentation of generic animal movement not involving
+veterinary certification, and `Sighting` for documentation of an animal’s
 or group of animals’ location on a given date.
 
 These additional root elements are not technically part of the eCVI data
@@ -856,7 +853,7 @@ accompanied by a code for its file type such as “image/jpeg” or
 “application/pdf.”
 
 The eCVI schema puts all such binary content in one element type,
-Binary. This element includes the base64 text, an optional file type,
+`Binary`. This element includes the base64 text, an optional file type,
 and most importantly an xs:ID attribute to allow it to be referenced in
 any of the more specific elements with binary content. It is hoped that
 this allows applications to implement the encoding and decoding once for
@@ -883,7 +880,7 @@ their usage is listed as optional or required. Again, if required, it
 means that every eCVI must have a value assigned to that attribute.
 Because the eCVI XML schema _is_ the standard, this is as far as the
 standard can enforce requiredness. (More advanced schema languages such
-as XML schema 1.1, RelaxNG, or Schematron, can enforce conditional
+as `XML schema 1.1`, `RelaxNG`, or `Schematron`, can enforce conditional
 requiredness by referencing other parts of the XML document so, for
 example, something might be required for cattle but not for horses. But,
 as discussed later, use of these would have significantly reduced the
@@ -908,7 +905,7 @@ any item that is included on the printed CVI and that has a
 corresponding element/attribute in the standard schema must be populated
 in the data file. More on the NASAHO evaluation process later.
 
-The xs:documentation elements in the schema often provide guidance on
+The `xs:documentation` elements in the schema often provide guidance on
 conditional requiredness beyond what is enforceable in schema language.
 
 # Tiptoe Through the Tags
@@ -916,7 +913,7 @@ conditional requiredness beyond what is enforceable in schema language.
 ## The XML Header
 
 The XML header on both the schema and documents must read exactly  
-\<?xml version="1.0" encoding="UTF-8"?\>. This never changes.
+`<?xml version="1.0" encoding="UTF-8"?>`. This never changes.
 
 But don’t ignore the header. Both of those values are important. Both
 XML version and character encoding are a common sources of processing
@@ -979,13 +976,13 @@ little more XML esoterica in the next section.
 
 Any XML element can declare itself and all its contents to belong to a
 default namespace. This is most often done in a root document element,
-eCVI in our case. Even though the current schema is version 3.1, the
+`eCVI` in our case. Even though the current schema is version 3.1, the
 namespace has not changed since version 2.0. All the names in version 3
 that existed in version 2 still mean the same things. Thus, the
-namespace is still listed as http://www.usaha.org/xmlns/ecvi2. The first
+namespace is still listed as `http://www.usaha.org/xmlns/ecvi2`. The first
 line after the header will usually read  
-\<eCVI xmlns=http://www.usaha.org/xmlns/ecvi2  
-Notice that there is no “\>” at the end of this line. The opening
+`<eCVI xmlns=http://www.usaha.org/xmlns/ecvi2`  
+Notice that there is no “>” at the end of this line. The opening
 element keeps going.
 
 Note that the definitions of namespaces often _look_ like URLs. They are
@@ -1000,32 +997,38 @@ location of the schema can be included in the root element tag. For
 security reasons, we discourage including a network address here (or in
 any include, import, etc.) but a local copy of the schema can be
 identified. Many good XML editors use that information to validate as
-you edit and to offer type-ahead. So my hand edited files include  
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-xsi:schemaLocation="http://www.usaha.org/xmlns/ecvi2  
-file:ecvi2.xsd"  
-as the next two lines. The first one defines the prefix xsi: as a
-namespace and the second uses the schemaLocation attribute from that
+you edit and to offer type-ahead. So my hand edited files include
+
+```xml
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.usaha.org/xmlns/ecvi2
+file:ecvi2.xsd"
+```
+
+as the next two lines. The first one defines the prefix `xsi:` as a
+namespace and the second uses the `schemaLocation` attribute from that
 namespace to say we want to use the file ecvi2.xsd from the current
 directory to define the namespace we put ourselves in above.
 
 The opening element of our schema root element is similar but adds the
-definition of the xs: prefix as XML schema names, declares the schema
+definition of the `xs:` prefix as XML schema names, declares the schema
 namespace _and_ target namespace to be our
 “http://www.usaha.org/xmlns/ecvi2” address, and the version to be “3.1
-”. The bit about elementFormDefault="qualified" just means use the
+”. The bit about `elementFormDefault="qualified"` just means use the
 schema namespace for element and attribute names. Now don’t worry about
 most of the declarations here. The most important is the
-XMLSchemaVersion="3.1" to be sure you are validating against the right
+`XMLSchemaVersion="3.1"` to be sure you are validating against the right
 version of the schema. If you are still actually validating against the
 previous version 3.0 this, of course, needs to be
-XMLSchemaVersion="3.0".
+`XMLSchemaVersion="3.0"`.
 
 NOTE: When you see an ellipsis . . . in these boxes, it means something
 more goes here but we will come back to that later or have already seen.
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?> <eCVI xmlns = "http://www.usaha.org/xmlns/ecvi2" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.usaha.org/xmlns/ecvi2 file:ecvi2.xsd" XMLSchemaVersion = "3. 1 " . . . >
+<?xml version="1.0" encoding="UTF-8"?>
+<eCVI xmlns = "http://www.usaha.org/xmlns/ecvi2"
+  xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.usaha.org/xmlns/ecvi2 file:ecvi2.xsd" XMLSchemaVersion = "3. 1 " . . . >
 ```
 
 Okay, that is about as nerdy as we are going to get. Now back to things
@@ -1042,7 +1045,7 @@ of attributes. No one knows what the folks at W3C were taking when they
 made that rule, but it must have been good. In this guide, I will
 usually follow the order in the document and discuss attributes first.
 Just know that in an element with both child elements and attributes you
-look for the attributes at the _end_ of the xs:complexType definition in
+look for the attributes at the _end_ of the `xs:complexType` definition in
 the schema.
 
 ## eCVI Element Attributes
@@ -1052,7 +1055,7 @@ The eCVI element includes some key housekeeping facts in attributes.
 ### XMLSchemaVersion
 
 We have seen this attribute earlier. It should always be the value found
-in the schema’s attribute version for the schema you are designing and
+in the schema’s attribute `version` for the schema you are designing and
 validating against. You _are_ validating against the schema in test,
 right? And ideally in production. Validating parsers really are fast
 enough to make this practical.
@@ -1061,8 +1064,8 @@ enough to make this practical.
 
 Nothing much to say here. This is the unique identifier displayed on the
 CVI as printed and used by anyone looking for a specific CVI. This
-attribute is required. Note that the data type is not just xs:string but
-a defined simple type nonNullString. That means that the value cannot be
+attribute is required. Note that the data type is not just `xs:string` but
+a defined simple type `nonNullString`. That means that the value cannot be
 empty or just whitespace. It really must have a meaningful value.
 
 ### CVINumberIssuedBy
@@ -1072,7 +1075,7 @@ print their forms or by different eCVI applications, we need to know the
 pool of numbers the CVI number was drawn from. For state paper CVIs,
 this would be the state postal code. For eCVI applications, it must be a
 string that uniquely identifies the application in a way that ensures
-that the CVINumberIssuedBy combined with the CVINumber will _never_ be
+that the `CVINumberIssuedBy` combined with the `CVINumber` will _never_ be
 repeated. This attribute is still optional as of version 3.1 but is
 highly encouraged because it is very useful in search, duplicate
 detection, etc. Some receiving applications go so far as to add it to
@@ -1122,26 +1125,36 @@ the paper world but can be quite efficient in software.
 The main difference between a replacement CVI and a new CVI is that the
 replacement relies upon the same veterinary inspection of the animals.
 
-The ReplacesCVINumber attribute contains _exactly_ the value from the
-CVINumber attribute of the eCVI being replaced. This attribute is
+The `ReplacesCVINumber` attribute contains _exactly_ the value from the
+`CVINumber` attribute of the eCVI being replaced. This attribute is
 optional, but conditional on the action being taken.
 
 ### Voided
 
 In the case of a replaced CVI, this attribute indicates that the eCVI
-identified by ReplacesCVINumber has been voided.
+identified by `ReplacesCVINumber` has been voided.
 
-In the case when a CVI is voided without replacement, ReplacesCVINumber
+In the case when a CVI is voided without replacement, `ReplacesCVINumber`
 is omitted and the attribute marks the current eCVI as void.
 
 This attribute is optional, but conditional on the action being taken.
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:attribute name = "XMLSchemaVersion" type = "nonNullString" use = "required" / > <xs:attribute name = "CviNumber" type = "nonNullString" use = "required" /> <xs:attribute name = "CviNumberIssuedBy" type = "xs:string" use = "optional" /> <xs:attribute name = "IssueDate" type = "xs:date" use = "required" / > <xs:attribute name = "ExpirationDate" type = "xs:date" use = "required" /> <xs:attribute name = "ShipmentDate" type = "xs:date" use = "optional" /> <xs:attribute name = "EntryPermitNumber" type = "xs:string" use = "optional" /> <xs:attribute name = "ReplacesCviNumber" type = "nonNullString" use = "optional" /> <xs:attribute name = "Voided" type = "xs:boolean" default = "false" use = "optional" / > . . . </xs:element>
+<xs:element name = "eCVI"> . . .  <xs:attribute name = "XMLSchemaVersion" type = "nonNullString" use = "required" / >
+    <xs:attribute name = "CviNumber" type = "nonNullString" use = "required" />
+    <xs:attribute name = "CviNumberIssuedBy" type = "xs:string" use = "optional" />
+    <xs:attribute name = "IssueDate" type = "xs:date" use = "required" / >
+      <xs:attribute name = "ExpirationDate" type = "xs:date" use = "required" />
+      <xs:attribute name = "ShipmentDate" type = "xs:date" use = "optional" />
+      <xs:attribute name = "EntryPermitNumber" type = "xs:string" use = "optional" />
+      <xs:attribute name = "ReplacesCviNumber" type = "nonNullString" use = "optional" />
+      <xs:attribute name = "Voided" type = "xs:boolean" default = "false" use = "optional" / > . . . </xs:element>
 ```
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?> <eCVI xmlns = "http://www.usaha.org/xmlns/ecvi2" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.usaha.org/xmlns/ecvi2 file:ecvi2.xsd" XMLSchemaVersion = "3. 1 " CviNumber = " SC001234 " CviNumberIssuedBy = " ZoomCVI " IssueDate = "202 5 -04-28" ExpirationDate = "202 5 -0 5 -28" ShipmentDate = "202 5 -0 4 - 30 " EntryPermitNumber = "zybLi9D6VqRZi" ReplacesCviNumber = " SC001233 " Voided = " true " >
+<?xml version="1.0" encoding="UTF-8"?>
+<eCVI xmlns = "http://www.usaha.org/xmlns/ecvi2"
+  xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.usaha.org/xmlns/ecvi2 file:ecvi2.xsd" XMLSchemaVersion = "3. 1 " CviNumber = " SC001234 " CviNumberIssuedBy = " ZoomCVI " IssueDate = "202 5 -04-28" ExpirationDate = "202 5 -0 5 -28" ShipmentDate = "202 5 -0 4 - 30 " EntryPermitNumber = "zybLi9D6VqRZi" ReplacesCviNumber = " SC001233 " Voided = " true ">
 ```
 
 ## eCVI Child Elements
@@ -1152,7 +1165,7 @@ details later as we drill down in a chapter on each complex element.
 
 ### Veterinarian
 
-The Veterinarian element doesn’t need a lot of explanation. The
+The `Veterinarian` element doesn’t need a lot of explanation. The
 veterinarian is the licensed and accredited individual veterinarian that
 signed the original CVI. The method of adding a signature, electronic or
 otherwise, is outside the scope of the eCVI XML standard. There is one
@@ -1183,7 +1196,7 @@ decision to make CVIs the country’s main source of movement information,
 the physical locations became more important than the seller and buyer
 data. So, origin became the mandatory part.
 
-The Origin element is a PremType element representing the animal
+The `Origin` element is a `PremType` element representing the animal
 premises as defined by the USDA animal disease traceability program
 where the animal(s) were located prior to movement. It must exist once
 and only once.
@@ -1195,15 +1208,25 @@ consignee or buyer. This gets more complicated in the real-world because
 details of the final destination are sometimes finalized at the last
 minute or even after a load has left the origin.
 
-The Destination is another PremType element that must exist once and
+The `Destination` is another `PremType` element that must exist once and
 only once.
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:complexType> <xs:sequence> <xs:element ref = "Veterinarian" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "MovementPurposes" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "Origin" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "Destination" minOccurs = "1" maxOccurs = "1" />
+<xs:element name = "eCVI"> . . .  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref = "Veterinarian" minOccurs = "1" maxOccurs = "1" />
+      <xs:element ref = "MovementPurposes" minOccurs = "1" maxOccurs = "1" />
+      <xs:element ref = "Origin" minOccurs = "1" maxOccurs = "1" />
+      <xs:element ref = "Destination" minOccurs = "1" maxOccurs = "1" />
+
 ```
 
 ```xml
-<eCVI . . . > <Veterinarian . . . > . . . </Veterinarian> <MovementPurposes> . . . </MovementPurposes> <Origin > . . . </Origin> <Destination > . . . </Destination>
+<eCVI . . . >
+  <Veterinarian . . . > . . . </Veterinarian>
+  <MovementPurposes> . . . </MovementPurposes>
+  <Origin > . . . </Origin>
+  <Destination > . . . </Destination>
 ```
 
 ### Consignor
@@ -1213,43 +1236,54 @@ movement. This may be the seller or the owner of the origin farm, etc.
 Historically, this was the most important information on the “from” end
 of the transaction. The move to using CVIs as the primary movement
 document changed this, and the origin premises is now the more important
-element, so Consignor is now optional. And can be used to send the name
+element, so `Consignor` is now optional. And can be used to send the name
 and address of the consignor especially if different from that in the
 origin premise element. If the same, it may be included but need not be.
-The Consignor is defined as a ContactType element that can occur zero or
-one time. We will cover the definition of ContactType later.
+The `Consignor` is defined as a `ContactType` element that can occur zero or
+one time. We will cover the definition of `ContactType` later.
 
 ### Consignee
 
-The same logic and structure apply to Consignee and Consignor. This is
+The same logic and structure apply to `Consignee` and `Consignor`. This is
 the person or business responsible for receiving the shipment.
 
 ### Carrier
 
-The Carrier is the person or business responsible for the physical
-movement of the animal(s), group(s) or product(s). It is a ContactType
+The `Carrier` is the person or business responsible for the physical
+movement of the animal(s), group(s) or product(s). It is a `ContactType`
 element that may occur once or may be omitted. Note, however, the
 National Assembly rule that if carrier occurs on the printed CVI, this
 element must be populated.
 
 ### TransportMode and TransportModeOtherDescription
 
-The mode of transport takes up two elements. The first TransportMode is
+The mode of transport takes up two elements. The first `TransportMode` is
 a string from a short list of methods of transport. This may be “air”,
 “boat”, “car”, “rail”, “truck”, or “land”. If the mode of transport is
 anything else, the value here may be “other”. While XML schema language
-1.0 does not provide for enforcement, if TransportMode is “other”, then
-TransportModeOtherDescription must be included and populated with more
-than whitespace (nonNullString). (Note: this could be refactored to be
-similar to SpeciesCode and SpeciesOther but for now the mode of
+1.0 does not provide for enforcement, if `TransportMode` is “other”, then
+`TransportModeOtherDescription` must be included and populated with more
+than whitespace (`nonNullString`). (Note: this could be refactored to be
+similar to `SpeciesCode` and `SpeciesOther` but for now the mode of
 transport is not critical enough to warrant the extra development work.)
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:complexType> <xs:sequence> . . . <xs:element ref = "Consignor" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Consignee" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Carrier" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "TransportMode" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "TransportModeOtherDescription" minOccurs = "0" maxOccurs = "1" />
+<xs:element name = "eCVI"> . . .  <xs:complexType>
+    <xs:sequence> . . .      <xs:element ref = "Consignor" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "Consignee" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "Carrier" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "TransportMode" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "TransportModeOtherDescription" minOccurs = "0" maxOccurs = "1" />
+
 ```
 
 ```xml
-<eCVI . . . > . . . <Consignor> . . . </Consignor> <Consignee> . . . </Consignee> <Carrier> . . . </Carrier> <TransportMode> other </TransportMode> <TransportModeOtherDescription> Flying saucer </TransportModeOtherDescription>
+<eCVI . . . > . . .
+<Consignor> . . . </Consignor>
+<Consignee> . . . </Consignee>
+<Carrier> . . . </Carrier>
+<TransportMode> other<TransportMode>
+<TransportModeOtherDescription> Flying saucer<TransportModeOtherDescription>
 ```
 
 ### Accessions
@@ -1260,64 +1294,77 @@ records for animal tests. In herd shipments one laboratory accession—or
 one field testing event—often includes all, or most of, the animals in a
 herd or flock. By putting accessions here, they can be included by
 reference in each of the animal tests. We will cover that mechanism in
-detail later. The Accessions element is a single list of zero or many
-Accession elements. If empty, the whole Accessions element may be
+detail later. The `Accessions` element is a single list of zero or many
+`Accession` elements. If empty, the whole `Accessions` element may be
 omitted.
 
 ### Animal, GroupLot, and Product
 
 The heart of the eCVI is a list of animals, groups of animals, and
 animal products that have been inspected and listed for shipment. The
-distinction between Animal and GroupLot is a little more complicated
+distinction between `Animal` and `GroupLot` is a little more complicated
 than it first seems. This is based on the USDA rules for animal disease
 traceability found in 9CFR86, etc. Some animals require individual
 official, unique identification that must be included on the CVI. That
-requirement is what defines Animal in the eCVI schema.
+requirement is what defines `Animal` in the eCVI schema.
 
 There are many exceptions to the individual identification requirement.
-GroupLot is for animals that fit any of those exceptions. Most, but not
+`GroupLot` is for animals that fit any of those exceptions. Most, but not
 all, of those are animals that move as a group. Some of those have
 requirements for an official Group Identification Number (GIN). Others
 may not require official identification at all or may require it but not
 require recording on the CVI. All those examples, even a single animal
-not requiring official ID on the CVI, go in GroupLot. If an animal that
+not requiring official ID on the CVI, go in `GroupLot`. If an animal that
 does not _require_ unique official animal ID on the CVI, nevertheless
-has it, it would be included as an Animal element. Note that 9CFR86
+has it, it would be included as an `Animal` element. Note that 9CFR86
 requires that CVIs for animals that do not require official
 identification on the CVI state the exemption that applies. This
-information must be provided in the description of the GroupLot. Thus,
+information must be provided in the description of the `GroupLot`. Thus,
 we will see, when we look at the structure in detail, that Description
 is one of the few required elements.
 
 If a group includes more than one animal, the information in the
-GroupLot element must apply to all the animals in the group. If not, it
-must be divided into groups that do. Most of the information in GroupLot
+`GroupLot` element must apply to all the animals in the group. If not, it
+must be divided into groups that do. Most of the information in `GroupLot`
 is optional but that does not allow for simply omitting the variables
 where differences occur because of the National Assembly requirement for
 all information on the printed CVI to be transmitted.
 
-Product is a third type of entity that may move on a CVI. These are
+`Product` is a third type of entity that may move on a CVI. These are
 animal-derived products that have animal health significance. These
 include things like embryos, semen, and hatching eggs. A full list is
 included later when we detail the structures of these three elements.
 
-Animal, GroupLot, and Product can repeat in any combination and order.
+`Animal`, `GroupLot`, and `Product` can repeat in any combination and order.
 There must, obviously, be at least one of any of these. Otherwise, there
 would be no point to the CVI.
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:element ref = "Accessions" minOccurs = "0" maxOccurs = "1" /> <xs:choice minOccurs = "1" maxOccurs = "unbounded" > <xs:element ref = "Animal" /> <xs:element ref = "GroupLot" /> <xs:element ref = "Product" /> </xs:choice>
+<xs:element name = "eCVI"> . . .  <xs:element ref = "Accessions" minOccurs = "0" maxOccurs = "1" />
+  <xs:choice minOccurs = "1" maxOccurs = "unbounded">
+    <xs:element ref = "Animal" />
+    <xs:element ref = "GroupLot" />
+    <xs:element ref = "Product" />
+  </xs:choice>
 ```
 
 ```xml
-<eCVI . . . > . . . <Accessions> <Accession . . . > . . . </Accession> <Accession . . . > . . . </Accession> </Accessions> <Animal . . . > . . . </Animal> < GroupLot . . . > . . . </ GroupLot > <Animal . . . > . . . </Animal> <Product . . . > . . . </Product>
+<eCVI . . . > . . .
+  <Accessions>
+    <Accession . . . > . . . </Accession>
+    <Accession . . . > . . . </Accession>
+  </Accessions>
+  <Animal . . . > . . . </Animal>
+  < GroupLot . . . > . . . </ GroupLot >
+  <Animal . . . > . . . </Animal>
+  <Product . . . > . . . </Product>
 ```
 
 ### Statements
 
-Structurally, the simplest element in the entire schema, Statements is
+Structurally, the simplest element in the entire schema, `Statements` is
 perhaps the hardest to get right in the larger definition of “right.”
-This is a single, optional, simple xs:string field. It is designed to
+This is a single, optional, simple `xs:string` field. It is designed to
 contain specific text that veterinarians need to include to meet
 specific movement requirements. These are often imposed on movements
 from areas with temporary disease concerns. They can usually be found at
@@ -1338,10 +1385,10 @@ attachments. In an electronic world this doesn’t make sense. Those data
 must be sent in the intended, structured form.
 
 This also does not include photographs of horses. Those have a
-structured location within the Animal element.
+structured location within the `Animal` element.
 
 Other attachments such as Coggins and other test records, may be
-included as binary attachments using the Attachment element that is
+included as binary attachments using the `Attachment` element that is
 optional and may repeat. We will cover the detailed construction of
 binary attachments later.
 
@@ -1369,25 +1416,38 @@ provide. This element provides a way for them to do so by arrangement
 with receiving systems while complying with the schema. Other receiving
 systems should be able to safely ignore this information.
 
-MiscAttribute is a simple, empty element with two xs:string attributes:
-Name and Value. So, anything that can be represented as text can be sent
+`MiscAttribute` is a simple, empty element with two `xs:string` attributes:
+`Name` and `Value`. So, anything that can be represented as text can be sent
 here.
 
 ### Binary
 
-The Binary element would never be used on its own. It is included in the
+The `Binary` element would never be used on its own. It is included in the
 eCVI by reference from any of several elements that have binary rather
-than ordinary text content. The Binary element itself holds just the
+than ordinary text content. The `Binary` element itself holds just the
 base64 encoded payload and a little information about what it is. It or
 they appear(s) at the very end of the eCVI because it is big and
 completely not human-readable.
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Attachment" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Binary" minOccurs = "0" maxOccurs = "unbounded" />
+<xs:element name = "eCVI"> . . .  <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" />
+  <xs:element ref = "Attachment" minOccurs = "0" maxOccurs = "unbounded" />
+  <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" />
+  <xs:element ref = "Binary" minOccurs = "0" maxOccurs = "unbounded" />
+
 ```
 
 ```xml
-<eCVI . . . > . . . <Statements> Animals have not been exposed to kryptonite </Statements> <Attachment . . . /> <Attachment . . . /> <MiscAttribute Name = " ShipmentWeight " Value = " 105tons " /> <MiscAttribute Name = " MaxSpeed " Value = " mac4 " /> <Binary . . . " > . . . </Binary> </eCVI>
+<eCVI . . . > . . .
+  <Statements> Animals have not been exposed to kryptonite </Statements>
+  <Attachment . . . />
+  <Attachment . . . />
+  <MiscAttribute Name = " ShipmentWeight " Value = " 105tons " />
+  <MiscAttribute Name = " MaxSpeed " Value = " mac4 " />
+  <Binary . . . ">
+   . . .
+   </Binary>
+ </eCVI>
 ```
 
 ## Details of Elements and Complex Types
@@ -1408,21 +1468,21 @@ contact card.
 
 The most interesting detail is the name of the person. This was a
 compromise between the splitters and lumpers. The element starts with
-either a Name element that is a simple string or a NameParts element.
+either a `Name` element that is a simple string or a NameParts element.
 This allows implementations that distinguish the name parts to transmit
 that detail but does not require those that collect it as a single “full
 name” string to parse it. It is easier for a receiving application to
 construct a full name from parts than a sending system to parse the
 other way. If the sending system has the name parsed into parts, they
-should be sent in NameParts rather than concatenated into Name.
+should be sent in `NameParts` rather than concatenated into Name.
 
-Name parts consists of BusinessName, FirstName, MiddleName, LastName,
-and OtherName each of which is a string and may be omitted. This is not
+Name parts consists of `BusinessName`, `FirstName`, `MiddleName`, `LastName`,
+and `OtherName` each of which is a string and may be omitted. This is not
 quite the fully-structured name that informaticists use to support
 internationalization but reduces much ambiguity.
 
-The rest of Person consists of contact methods: Phone,
-InternationalPhone, and Email. The first two require a little
+The rest of `Person` consists of contact methods: `Phone`,
+`InternationalPhone`, and `Email`. The first two require a little
 explanation. In the interest of data-quality, the standard constrains
 simple data types as tightly as possible. Because this is a US standard,
 most phone numbers will follow the consistent ten-digit pattern we are
@@ -1430,10 +1490,10 @@ all used to. Internationally the picture gets much more complex. Rather
 than allow every international pattern all the time, the standard
 requires international phone numbers to go in their own element defined
 by a very complicated RegEx pattern that we will discuss later. There
-can be any number of Phone and/or InternationalPhone elements.
+can be any number of `Phone` and/or `InternationalPhone` elements.
 
-Besides the number, both Phone and InternationalPhone include an
-optional string attribute Comment, and an optional Type attribute that
+Besides the number, both `Phone` and `InternationalPhone` include an
+optional string attribute `Comment`, and an optional `Type` attribute that
 allowed values, “Unknown”, “Landline”, “Cellphone”, and “Fax”. Why would
 one include this attribute only to list the value as “Unknown?” Type was
 previously required but as people have made less and less distinction
@@ -1441,16 +1501,39 @@ between cell phones and landlines, and as faxes have faded, “Unknown”
 became the default answer in most applications. So, this attribute was
 changed to optional. In the continuing spirit of simplifying the
 transition, the previous implementation continues to be supported. A new
-eCVI implementation would probably omit Type if none is collected in the
+eCVI implementation would probably omit `Type` if none is collected in the
 user interface.
 
-The Email element is a one string element defined by EmailType. This
+The `Email` element is a one string element defined by `EmailType`. This
 simple type restricts the value to follow a RegEx that means, more or
 less, anystring@anystring.anystring. Detailed explanation will come
-later. Any number of Email elements may occur.
+later. Any number of `Email` elements may occur.
 
 ```xml
-<xs:element name = "Person" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "NameParts" minOccurs = "1" maxOccurs = "1" /> <xs:element name = "Name" type = "xs:string" minOccurs = "1" maxOccurs = "1" /> </xs:choice> <xs:element ref = "Phone" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "InternationalPhone" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Email" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> </xs:complexType> </xs:element> <xs:element name = "NameParts" > <xs:complexType> <xs:sequence> <xs:element name = "BusinessName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "FirstName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "MiddleName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "LastName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "OtherName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> </xs:sequence> </xs:complexType> </xs:element>
+<xs:element name = "Person">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref = "NameParts" minOccurs = "1" maxOccurs = "1" />
+        <xs:element name = "Name" type = "xs:string" minOccurs = "1" maxOccurs = "1" />
+      </xs:choice>
+      <xs:element ref = "Phone" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "InternationalPhone" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Email" minOccurs = "0" maxOccurs = "unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+<xs:element name = "NameParts">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name = "BusinessName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+      <xs:element name = "FirstName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+      <xs:element name = "MiddleName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+      <xs:element name = "LastName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+      <xs:element name = "OtherName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
@@ -1474,8 +1557,8 @@ later. Any number of Email elements may occur.
 A veterinarian is a natural person, and we will see, later in this
 section, how that affects the standard schema.
 
-The Veterinarian element has attributes for LicenseState, LicenseNumber,
-and NationalAccreditationNumber. These are all currently optional. This
+The `Veterinarian` element has attributes for `LicenseState`, `LicenseNumber`,
+and `NationalAccreditationNumber`. These are all currently optional. This
 is one place where it would pay to be future-proofing. Besides the
 NASAHO requirement for all items printed to be in the data, these items,
 especially the accreditation number, are becoming more and more
@@ -1487,32 +1570,37 @@ exceptions, we may expect one or all of these to become required in a
 future version of the standard.
 
 ```xml
-<xs:element name = "Veterinarian" > <xs:complexType> . . . <xs:attribute name = "LicenseState" type = "xs:string" use = "optional" /> <xs:attribute name = "LicenseNumber" type = "xs:string" use = "optional" /> <xs:attribute name = "NationalAccreditationNumber" type = "xs:string" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name = "Veterinarian">
+  <xs:complexType> . . .    <xs:attribute name = "LicenseState" type = "xs:string" use = "optional" />
+    <xs:attribute name = "LicenseNumber" type = "xs:string" use = "optional" />
+    <xs:attribute name = "NationalAccreditationNumber" type = "xs:string" use = "optional" />
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
 <Veterinarian LicenseState = " SC " LicenseNumber = " 2403 " NationalAccreditationNumber = " 001234 " > . . .
 ```
 
-The Veterinarian element has two child elements, Person and Address. And
+The `Veterinarian element` has two child elements, `Person` and `Address`. And
 now it gets interesting.
 
-There is a Person element defined at the top level of the schema but
-that is _not_ used here. Veterinarian redefines the Person element to be
-exactly like the top-level Person except that FirstName and LastName in
-the NameParts element become required. They must each occur once and
+There is a `Person` element defined at the top level of the schema but
+that is _not_ used here. `Veterinarian` redefines the `Person` element to be
+exactly like the top-level `Person` except that `FirstName` and `LastName` in
+the `NameParts` element become required. They must each occur once and
 only once. This is to emphasize that the veterinarian must be a real,
 natural person. Why would the standard do this rather than define two
 types for legal and natural persons? The reason is the workgroup’s
 commitment to minimize the impact of changes on existing
 implementations. By the time someone noticed a few instances of eCVIs
 with veterinary practices listed as the veterinarian, there were already
-many eCVIs out there, using Person correctly in both cases. The strange
-looking redefinition of Person in just the Veterinarian element allowed
+many eCVIs out there, using `Person` correctly in both cases. The strange
+looking redefinition of `Person` in just the `Veterinarian` element allowed
 all correct instances to remain valid while invalidating only those with
-just a BusinessName. All that said, it is still possible, but wrong, to
-send just a business by using the unstructured Name element instead of
-NameParts. But please don’t do that.
+just a `BusinessName`. All that said, it is still possible, but wrong, to
+send just a business by using the unstructured `Name` element instead of
+`NameParts`. But please don’t do that.
 
 And why aren’t natural person and legal person defined as top-level
 complex types and used in the various locations that way? Who knows?
@@ -1526,13 +1614,42 @@ change would make absolutely no difference in validation of eCVI
 documents.
 
 The two different types of addresses _are_ defined as top-level complex
-types. Address in the Veterinarian element is defined by the
-InternationalAddress complex type. This distinction allows for the
+types. `Address` in the `Veterinarian` element is defined by the
+`InternationalAddress` complex type. This distinction allows for the
 possibility that a veterinarian could have a practice address in another
 country but also be licensed and accredited in the US.
 
 ```xml
-<xs:element name = "Veterinarian" > <xs:complexType> <xs:sequence> <xs:element name = "Person" minOccurs = "1" maxOccurs = "1" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element name = "NameParts" > <xs:complexType> <xs:sequence> <xs:element name = "BusinessName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "FirstName" type = "xs:string" minOccurs = "1" maxOccurs = "1" /> <xs:element name = "MiddleName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "LastName" type = "xs:string" minOccurs = "1" maxOccurs = "1" /> <xs:element name = "OtherName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> </xs:sequence> </xs:complexType> </xs:element> <xs:element name = "Name" type = "xs:string" minOccurs = "1" maxOccurs = "1" /> </xs:choice> <xs:element ref = "Phone" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "InternationalPhone" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Email" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> </xs:complexType> </xs:element> <xs:element name = "Address" type = "InternationalAddress" minOccurs = "0" maxOccurs = "1" /> </xs:sequence> . . . </xs:complexType> </xs:element>
+<xs:element name = "Veterinarian">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name = "Person" minOccurs = "1" maxOccurs = "1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice>
+              <xs:element name = "NameParts">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name = "BusinessName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+                    <xs:element name = "FirstName" type = "xs:string" minOccurs = "1" maxOccurs = "1" />
+                    <xs:element name = "MiddleName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+                    <xs:element name = "LastName" type = "xs:string" minOccurs = "1" maxOccurs = "1" />
+                    <xs:element name = "OtherName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name = "Name" type = "xs:string" minOccurs = "1" maxOccurs = "1" />
+            </xs:choice>
+            <xs:element ref = "Phone" minOccurs = "0" maxOccurs = "unbounded" />
+            <xs:element ref = "InternationalPhone" minOccurs = "0" maxOccurs = "unbounded" />
+            <xs:element ref = "Email" minOccurs = "0" maxOccurs = "unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = "Address" type = "InternationalAddress" minOccurs = "0" maxOccurs = "1" />
+    </xs:sequence> . . .
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
@@ -1559,27 +1676,40 @@ country but also be licensed and accredited in the US.
 
 ### MovementPurposes
 
-The MovementPurposes element is a fairly simple—but still called a
-xs:complexType in XML—container for a list of individual MovementPurpose
+The `MovementPurposes` element is a fairly simple—but still called a
+`xs:complexType` in XML—container for a list of individual `MovementPurpose`
 elements. The list itself must exist once and only once. Within it may
 be zero to any number of individual purposes. This is one example of
 something you will notice throughout the schema. This is one of those
 cases where the workgroup knew it could not account for all possible
 reasons for movement so it also allows an “other” value. Then an
-OtherReason element must provide the reason as a simple string.
+`OtherReason` element must provide the reason as a simple string.
 
-So why do we have MovementPurposes that may be empty but, later in the
+So why do we have `MovementPurposes` that may be empty but, later in the
 schema, Attachment that may have zero or many copies? Just another
 stylistic fluke. So, “Sorry” to new implementers and, “You are welcome”
 to those who have been around from the beginning and don’t want to
 change just for consistency.
 
 ```xml
-<xs:element name = "eCVI" > . . . <xs:complexType> <xs:sequence> . . . <xs:element ref = "MovementPurposes" minOccurs = "1" maxOccurs = "1" /> . . .
+<xs:element name = "eCVI" >
+  . . .
+  <xs:complexType>
+    <xs:sequence>
+      . . .
+      <xs:element ref = "MovementPurposes" minOccurs = "1" maxOccurs = "1" />
+      . . .
 ```
 
 ```xml
-<eCVI . . . > . . . <MovementPurposes> <MovementPurpose> Competition </MovementPurpose> <MovementPurpose> Other </MovementPurpose> <OtherReason> Abduction by aliens </OtherReason> </MovementPurposes> . . .
+<eCVI . . . >
+  . . .
+  <MovementPurposes>
+    <MovementPurpose> Competition </MovementPurpose>
+    <MovementPurpose> Other </MovementPurpose>
+    <OtherReason> Abduction by aliens </OtherReason>
+  <MovementPurposes>
+. . .
 ```
 
 ### USAddress
@@ -1590,24 +1720,53 @@ state, and zip code. A zip code may be either five or nine digits. The
 standard also allows for county. It also allows for a country code that
 because this is a US address must be “USA.”
 
-The USAddress type includes child elements: Line1, Line2, Town, County,
-State, Zip, Country, and GeoPoint. If a GeoPoint element is included, it
-must have Latitude and Longitude attributes. These are defined as
+The `USAddress` type includes child elements: `Line1`, `Line2`, `Town`, `County`,
+`State`, `Zip`, `Country`, and `GeoPoint`. If a `GeoPoint` element is included, it
+must have `Latitude` and `Longitude` attributes. These are defined as
 floating-point numbers with the appropriate allowed values for decimal
 degrees.
 
-Of all these elements, only the **State** element is required. This is
+Of all these elements, only the `State` element is required. This is
 to allow maximum utility of the standard. But be aware that the full
 requiredness is determined outside the schema by state and federal
 traceability rules.
 
-Address is restricted to USAddress in only two places in the schema.
+`Address` is restricted to `USAddress` in only two places in the schema.
 Premises must be in the US based on the scope of the standard. And if
 testing is performed “in the field” the location of testing must be in
 the US.
 
 ```xml
-<xs:complexType name = "USAddress" > <xs:sequence> <xs:element name = "Line1" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Line2" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Town" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "County" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "State" type = "StateCodeType" minOccurs = "1" maxOccurs = "1" /> <xs:element name = "ZIP" minOccurs = "0" maxOccurs = "1" > <xs:simpleType> <xs:restriction base = "xs:string" > <xs:pattern value = "\\d{ 5 }" /> <xs:pattern value = "\\d{ 5 }-\\d{ 4 }" /> </xs:restriction> </xs:simpleType> </xs:element> <xs:element name = "Country" minOccurs = "0" maxOccurs = "1" > <xs:simpleType> <xs:restriction base = "xs:string" > <xs:enumeration value = "USA" /> </xs:restriction> </xs:simpleType> </xs:element> <xs:element name = "GeoPoint" minOccurs = "0" maxOccurs = "1" > <xs:complexType> <xs:attribute name = "Latitude" type = "LatitudeType" use = "required" /> <xs:attribute name = "Longitude" type = "LongitudeType" use = "required" /> </xs:complexType> </xs:element> </xs:sequence> </xs:complexType>
+<xs:complexType name = "USAddress">
+  <xs:sequence>
+    <xs:element name = "Line1" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "Line2" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "Town" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "County" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "State" type = "StateCodeType" minOccurs = "1" maxOccurs = "1" />
+    <xs:element name = "ZIP" minOccurs = "0" maxOccurs = "1">
+      <xs:simpleType>
+        <xs:restriction base = "xs:string">
+          <xs:pattern value = "\\d{ 5 }" />
+          <xs:pattern value = "\\d{ 5 }-\\d{ 4 }" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:element>
+    <xs:element name = "Country" minOccurs = "0" maxOccurs = "1">
+      <xs:simpleType>
+        <xs:restriction base = "xs:string">
+          <xs:enumeration value = "USA" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:element>
+    <xs:element name = "GeoPoint" minOccurs = "0" maxOccurs = "1">
+      <xs:complexType>
+        <xs:attribute name = "Latitude" type = "LatitudeType" use = "required" />
+        <xs:attribute name = "Longitude" type = "LongitudeType" use = "required" />
+      </xs:complexType>
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
 ```
 
 ```xml
@@ -1624,7 +1783,7 @@ the US.
 
 ### InternationalAddress
 
-I presented USAddress first so that I can discuss InternationalAddress
+I presented `USAddress` first so that I can discuss `InternationalAddress`
 by comparison. The structure is identical by design. This supports
 common usage and database structures that can contain either. Some of
 the child element names are used analogously. For example, the major
@@ -1635,20 +1794,20 @@ These might have been more correctly named “Major Political Subdivision”
 and “Additional Political Subdivision” but because the vast majority of
 addresses will be US addresses, the naming follows the most common US
 pattern. The same logic applies to the “postal code” element that
-retains the element name ZIP.
+retains the element name `ZIP`.
 
-The defining difference between InternationalAddress and USAddress is
-the looser definitions of ZIP and CountryCode both of which are simple
-strings. CountryCode is any three-character string. (This could have
+The defining difference between `InternationalAddress` and `USAddress` is
+the looser definitions of `ZIP` and `CountryCode` both of which are simple
+strings. `CountryCode` is any three-character string. (This could have
 been a huge RegEx of all known country codes but would have created
-maintenance issues.) ZIP can be any string because different countries
+maintenance issues.) `ZIP` can be any string because different countries
 use very different formatting of postal codes.
 
 It is interesting that the US address vs. international address issue is
 very similar to that of natural person vs. legal person. Address is
 defined in slightly different ways in different places by using defined
 complex types. Person’s definition is changed by overwriting it in the
-Veterinarian definition rather than by defining two distinct complex
+`Veterinarian` definition rather than by defining two distinct complex
 types. The effect is identical in each case. Once again this can be
 partly explained by the time over which development has taken place and
 the workgroup’s preference for leaving things alone. Either of these
@@ -1661,7 +1820,29 @@ code. If working “from scratch” natural person and legal person would
 probably be defined types similar to the two address types.
 
 ```xml
-<xs:complexType name = "InternationalAddress" > <xs:sequence> <xs:element name = "Line1" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Line2" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Town" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "County" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "State" type = "xs:string" minOccurs = " 0 " maxOccurs = "1" / > <xs:element name = "ZIP" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Country" minOccurs = "0" maxOccurs = "1" > <xs:simpleType> <xs:restriction base = "xs:string" > <xs:length value = "3" /> </xs:restriction> </xs:simpleType> </xs:element> <xs:element name = "GeoPoint" minOccurs = "0" maxOccurs = "1" > <xs:complexType> <xs:attribute name = "Latitude" type = "LatitudeType" use = "required" /> <xs:attribute name = "Longitude" type = "LongitudeType" use = "required" /> </xs:complexType> </xs:element> </xs:sequence> </xs:complexType>
+<xs:complexType name = "InternationalAddress">
+  <xs:sequence>
+    <xs:element name = "Line1" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "Line2" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "Town" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "County" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "State" type = "xs:string" minOccurs = " 0 " maxOccurs = "1" / >
+      <xs:element name = "ZIP" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+      <xs:element name = "Country" minOccurs = "0" maxOccurs = "1">
+        <xs:simpleType>
+          <xs:restriction base = "xs:string">
+            <xs:length value = "3" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name = "GeoPoint" minOccurs = "0" maxOccurs = "1">
+        <xs:complexType>
+          <xs:attribute name = "Latitude" type = "LatitudeType" use = "required" />
+          <xs:attribute name = "Longitude" type = "LongitudeType" use = "required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 ```
 
 ```xml
@@ -1680,21 +1861,21 @@ was required in version 3.0, we used the “DK” country code that is
 sometimes included in their postal codes. Sometimes implementations
 dealing with these kinds of “edge cases” have to construct work-arounds
 like this. The standard does not account for absolutely every possible
-case. Version 3.1 changed this to make State optional in
-InternationalAddress, but not USAddress. Leaving State out of an
-InternationalAddress is meant only for countries that do not have
+case. Version 3.1 changed this to make `State` optional in
+`InternationalAddress`, but not `USAddress`. Leaving `State` out of an
+`InternationalAddress` is meant only for countries that do not have
 political subdivisions and should be extremely rare.
 
 ### Origin, Destination, PremType
 
 Because the data structures of Origin and Destination are identical,
 they are defined as very thin elements with all the details in the
-defined complex type PremType. The PremType is a complex type containing
+defined complex type `PremType`. The `PremType` is a complex type containing
 the basic premises identification as well as statuses that apply at the
 premises level.
 
 With premises identification we get right back into politics. The first
-child element is PremId which is a seven-character national premises
+child element is `PremId` which is a seven-character national premises
 identification number (PIN), or a six- or eight-character state issued
 location identifier (LID). This is defined as a string of six to eight
 capital letters or digits. Proper validation of PINs is much more
@@ -1705,10 +1886,10 @@ compromise did not eliminate the political objection to a nationally
 unique place identifier, this element is optional. It can occur zero or
 one time. The check digit algorithm is covered in Appendix A.
 
-The PremName element is a simple string that is also optional, zero or
+The `PremName` element is a simple string that is also optional, zero or
 one occurrences.
 
-Address is a required instance of the USAddress type. While it is not
+`Address` is a required instance of the `USAddress` type. While it is not
 enforceable via schema language, traceability rules require that this be
 a physical street address, not a postal route or box number. One and
 only one Address is required.
@@ -1718,34 +1899,62 @@ either from its location in a state or other defined area that has a
 status or by participation in a herd status program. These are covered
 in more detail in the next two sections.
 
-Finally, the premises may have any number of Person elements. These are
-the normal “legal person” definition of Person so they may be businesses
+Finally, the premises may have any number of `Person` elements. These are
+the normal “legal person” definition of `Person` so they may be businesses
 or actual people such as the owner of the premises, a market company, or
-other responsible entity. The Person records here relate to the _place_
+other responsible entity. The `Person` records here relate to the _place_
 from which the animals move. If the consignor or consignee has a
 different contact address that information would belong in a separate
-element, Consignor or Consignee.
+element, `Consignor` or `Consignee`.
 
 ```xml
-<xs:complexType name = "PremType" > <xs:sequence> <xs:element name = "PremId" type = "PremIdType" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "PremName" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Address" type = "USAddress" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "StateZoneOrAreaStatus" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "HerdOrFlockStatus" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Person" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> </xs:complexType>
+<xs:complexType name = "PremType">
+  <xs:sequence>
+    <xs:element name = "PremId" type = "PremIdType" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "PremName" type = "xs:string" minOccurs = "0" maxOccurs = "1" />
+    <xs:element name = "Address" type = "USAddress" minOccurs = "1" maxOccurs = "1" />
+    <xs:element ref = "StateZoneOrAreaStatus" minOccurs = "0" maxOccurs = "unbounded" />
+    <xs:element ref = "HerdOrFlockStatus" minOccurs = "0" maxOccurs = "unbounded" />
+    <xs:element ref = "Person" minOccurs = "0" maxOccurs = "unbounded" />
+  </xs:sequence>
+</xs:complexType>
 ```
 
 ```xml
-Origin> <PremId> 003EZUN </PremId> <PremName> SomeFarm Home Place </PremName> <Address> <Line1> 123 Real Road </Line1> <Town> Sometown </Town> <State> MI </State> <ZIP> 00634-7353 </ZIP> <Country> USA </Country> </Address> <StateZoneOrAreaStatus> <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)" /> </StateZoneOrAreaStatus> <HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free " /> <Person> <Name> Polly PremOwner </Name> <Phone Number = "7338812262" /> <Email Address = " Polly@Somefarm.com " /> </Person> </Origin>
+Origin>
+<PremId> 003EZUN </PremId>
+<PremName> SomeFarm Home Place </PremName>
+<Address>
+  <Line1> 123 Real Road </Line1>
+  <Town> Sometown </Town>
+  <State> MI </State>
+  <ZIP> 00634-7353 </ZIP>
+  <Country> USA </Country>
+</Address>
+<StateZoneOrAreaStatus>
+  <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)" />
+</StateZoneOrAreaStatus>
+<HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free " />
+<Person>
+  <Name> Polly PremOwner </Name>
+  <Phone Number = "7338812262" />
+  <Email Address = " Polly@Somefarm.com " />
+</Person>
+</Origin>
 ```
 
 ### StateZoneOrAreaStatus
 
-This StateZoneOrAreaStatus element is a child element of PremType and
+This `StateZoneOrAreaStatus` element is a child element of `PremType` and
 can repeat. Each instance contains one child element that may be for TB,
 Brucellosis, or Other. Each of these is an empty XML element whose name
 tells the type of status and whose one attribute Status is pulled from a
 list of disease program specific status titles.
 
-BrucellosisStateOrAreaStatus can have values: “Free”, “Class A”, “Class
+`BrucellosisStateOrAreaStatus` can have values: “Free”, “Class A”, “Class
 B”, “Class C”, or “GYA, DSA (Class A)”.
 
-TuberculosisStateOrZoneStatus can have values: “Free”, “Modified
+`TuberculosisStateOrZoneStatus` can have values: “Free”, “Modified
 Accredited Advanced State or Zone (MAA)”, “Modified Accredited State or
 Zone (MA)”, or “Non Accredited State or Zone (NA)”.
 
@@ -1755,99 +1964,156 @@ _exactly_ the characters listed in the schema to validate. This allows
 receiving systems to map directly to their database representation of
 these statuses rather than require human interpretation.
 
-There is also an element for anything else. OtherStateOrZoneStatus is
+There is also an element for anything else. `OtherStateOrZoneStatus` is
 one of those future-proofing “other” categories. As with the other,
 “other” cases, this must not be used to carry TB or Brucellosis
 statuses that can go into the above structures. Unlike the first two,
-this one has two attributes, the first is a Disease as ordinary text and
-the second is the Status, which in this case is another ordinary string.
+this one has two attributes, the first is a `Disease` as ordinary text and
+the second is the `Status`, which in this case is another ordinary string.
 
 ```xml
-<xs:element name = "StateZoneOrAreaStatus" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "BrucellosisStateOrAreaStatus" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "TuberculosisStateOrZoneStatus" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "OtherStateOrZoneStatus" minOccurs = "1" maxOccurs = "1" /> </xs:choice> </xs:sequence> </xs:complexType> </xs:element>
+<xs:element name = "StateZoneOrAreaStatus">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref = "BrucellosisStateOrAreaStatus" minOccurs = "1" maxOccurs = "1" />
+        <xs:element ref = "TuberculosisStateOrZoneStatus" minOccurs = "1" maxOccurs = "1" />
+        <xs:element ref = "OtherStateOrZoneStatus" minOccurs = "1" maxOccurs = "1" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
 ```
 
 ### HerdOrFlockStatus
 
 A herd or flock status is more complicated in real-life but simpler here
 because the number of variations is beyond enumerating the way the
-standard does with state and zone statuses. The HerdOrFlockStatus
-element can repeat any number of times in a PremType element. Each
-instance is an empty element with up to three attributes. Disease is the
+standard does with state and zone statuses. The `HerdOrFlockStatus`
+element can repeat any number of times in a `PremType` element. Each
+instance is an empty element with up to three attributes. `Disease` is the
 disease covered by the status as a required non-empty string. Many herd
 and flock certification programs issue program specific identifiers for
-the covered entity. The attribute HerdOrFlockID is an optional simple
+the covered entity. The attribute `HerdOrFlockID` is an optional simple
 string to hold this identifier, if any. Some certification programs have
 distinct status levels. The status or status level goes in the optional
 simple string attribute Status.
 
 ```xml
-<xs:element name = "HerdOrFlockStatus" > <xs:complexType> <xs:attribute name = "Disease" type = "nonNullString" use = "required" / > <xs:attribute name = "HerdOrFlockID" type = "xs:string" use = "optional" / > <xs:attribute name = "Status" type = "xs:string" use = "optional" / > </xs:complexType> </xs:element>
+<xs:element name = "HerdOrFlockStatus">
+  <xs:complexType>
+    <xs:attribute name = "Disease" type = "nonNullString" use = "required" / >
+      <xs:attribute name = "HerdOrFlockID" type = "xs:string" use = "optional" / >
+        <xs:attribute name = "Status" type = "xs:string" use = "optional" / ></xs:complexType>
+      </xs:element>
 ```
 
 ```xml
-< Origin> <PremId> 003EZUN </PremId> <PremName> SomeFarm Home Place </PremName> <Address> <Line1> 123 Real Road </Line1> <Town> Sometown </Town> <State> MI </State> <ZIP> 00634-7353 </ZIP> <Country> USA </Country> </Address> <StateZoneOrAreaStatus> <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)" /> </StateZoneOrAreaStatus> <StateZoneOrAreaStatus> < Other StateOrZoneStatus Disease = " Nose and Tail disease " Status = " Free " /> </StateZoneOrAreaStatus> <HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free " /> <Person> <Name> Polly PremOwner </Name> <Phone Number = "7338812262" /> <Email Address = " Polly@Somefarm.com " /> </Person> </Origin>
+< Origin>
+  <PremId> 003EZUN </PremId>
+  <PremName> SomeFarm Home Place </PremName>
+  <Address>
+    <Line1> 123 Real Road </Line1><Town> Sometown </Town><State> MI </State><ZIP> 00634-7353 </ZIP><Country> USA </Country>
+  <Address>
+  <StateZoneOrAreaStatus>
+    <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)" />
+  </StateZoneOrAreaStatus>
+  <StateZoneOrAreaStatus>
+    <Other StateOrZoneStatus Disease = " Nose and Tail disease " Status = " Free " />
+  </StateZoneOrAreaStatus>
+  <HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free " />
+  <Person>
+    <Name> Polly PremOwner </Name>
+    <Phone Number = "7338812262" />
+    <Email Address = " Polly@Somefarm.com " />
+  </Person>
+</Origin>
 ```
 
 ### Consignor, Consignee, ContactType
 
-ContactType is used to define both Consignor and Consignee. This
-consists of an Address element of the international type of address. The
-Address is optional. It is followed by one or more Person elements of
+`ContactType` is used to define both `Consignor` and `Consignee`. This
+consists of an `Address` element of the international type of address. The
+`Address` is optional. It is followed by one or more `Person` elements of
 the “legal person” variety. Why are these elements in this order? The
-only reason is to parallel the related structure of the PremType. For
-the ContactType definition of Address a postal box or route number is
+only reason is to parallel the related structure of the `PremType`. For
+the `ContactType` definition of `Address` a postal box or route number is
 acceptable because this is designed for making contact with a
 responsible person rather than to locate animals.
 
 ```xml
-<xs:complexType name = "ContactType" > <xs:sequence> <xs:element name = "Address" type = "InternationalAddress" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Person" minOccurs = "1" maxOccurs = "unbounded" /> </xs:sequence> </xs:complexType>
+<xs:complexType name = "ContactType" >
+  <xs:sequence>
+    <xs:element name = "Address" type = "InternationalAddress" minOccurs = "0" maxOccurs = "1" />
+    <xs:element ref = "Person" minOccurs = "1" maxOccurs = "unbounded" /> </xs:sequence>
+  </xs:complexType>
 ```
 
 ```xml
-<Consignor> <Address> <Line1> Kastanievej 15 </Line1> <Town> SKANDERBORG </Town> <State> DK </State> <ZIP> 8660 </ZIP> <Country> DNK </Country> </Address> <Person> <NameParts> <BusinessName> Shipper Inc. </BusinessName> <FirstName> Sally </FirstName> <MiddleName> Q </MiddleName> <LastName> Shipper </LastName> <OtherName> von Shiple </OtherName> </NameParts> <Phone Number = "2290040270" Type = "Cellphone" /> <InternationalPhone Number = "39123445" Comment = "Intergalactic hyperphone" /> <Email Address = "Sally@shipper.com" /> <Email Address = "Shipping@shipper.com" /> /Person> </Consignor>
+<Consignor>
+  <Address>
+    <Line1> Kastanievej 15 </Line1>
+    <Town> SKANDERBORG </Town>
+    <State> DK </State>
+    <ZIP> 8660 </ZIP>
+    <Country> DNK </Country>
+  </Address>
+  <Person>
+    <NameParts>
+      <BusinessName> Shipper Inc. </BusinessName>
+      <FirstName> Sally </FirstName>
+      <MiddleName> Q </MiddleName>
+      <LastName> Shipper </LastName>
+      <OtherName> von Shiple </OtherName>
+    </NameParts>
+    <Phone Number = "2290040270" Type = "Cellphone" />
+    <InternationalPhone Number = "39123445" Comment = "Intergalactic hyperphone" />
+    <Email Address = "Sally@shipper.com" />
+    <Email Address = "Shipping@shipper.com" />
+  </Person></Consignor>
 ```
 
 ### Animal
 
 After the origin and destination information, the most important
 information in a CVI is that which identifies and describes the animals,
-or animal products that have been inspected. The Animal element gets
+or animal products that have been inspected. The `Animal` element gets
 complicated, but we can simplify it by taking one layer of information
 at a time and then looking at each in more detail. Remember that an eCVI
-must contain one of the three element types (Animal, GroupLot, or
-Product) but can have as many as necessary in any order.
+must contain one of the three element types (`Animal`, `GroupLot`, or
+`Product`) but can have as many as necessary in any order.
 
-The Animal element has attributes for Age, Breed, Sex, and
-InspectionDate. Of these, only the InspectionDate is required.
+The `Animal` element has attributes for `Age`, `Breed`, `Sex`, and
+`InspectionDate`. Of these, only the `InspectionDate` is required.
 
-Age is a complicated simple type\! This includes both the numeric value
+`Age` is a complicated simple type! This includes both the numeric value
 and units in one string defined by a pair of complicated regular
 expressions. Receiving systems have some intricate parsing to do. One
 option is to include the date of birth in a format that matches the
-xs:date (YYYY-MM-DD). The other option is to include age in days, weeks,
+`xs:date` (YYYY-MM-DD). The other option is to include age in days, weeks,
 months, or years. The abbreviations for these are: “d”, “wk”, “mo”, and
 “a”. Lower case “a” is the international abbreviation for year (annum,
 I guess). A space is optional. So, a six-week-old animal would have
-Age=”6wk” or Age=“6 wk” for this attribute.
+`Age=”6wk”` or `Age=“6 wk”` for this attribute.
 
-Breed is a simple xs:string. This is _not_ for the official taxonomy of
+`Breed` is a simple `xs:string`. This is _not_ for the official taxonomy of
 the animal, but for any additional breed specification. Properly
 distinguishing those is a challenge for eCVI developers to work out in
 the user interface. If official three-letter breed codes exist, those
 _should_ be used, but this field allows flexibility.
 
-Sex is a pair of attributes. The Sex attribute itself has an enumerated
+`Sex` is a pair of attributes. The `Sex` attribute itself has an enumerated
 value set: “Female”, “Male”, “Spayed Female”, “Neutered Male”, “True
 Hermaphrodite”, “Gender Unknown” and “Other”. There is that nasty
 “other” again. The working group discussed a large list of other
 weird intersex categories and eventually decided that the confusion
 presented by an attempt at an exhaustive list would add more confusion
 than it would shed light. If “Other” is selected, the best possible
-description of the sex goes in SexDetail as a simple xs:string. And
+description of the sex goes in `SexDetail` as a simple `xs:string`. And
 again, schema language cannot catch a violation of this usage rule but
 that is the intent.
 
-InspectionDate is a required xs:date attribute that, as the name
+`InspectionDate` is a required `xs:date` attribute that, as the name
 implies, is the date that this animal was inspected. Most people think
 of the inspection date as an attribute of the CVI rather than each
 individual animal and in most cases this date will be the same for all
@@ -1861,105 +2127,160 @@ place behind the scenes. And the added space, which seems to bother some
 people, really is trivial. XML is a very space conservative format
 compared to any binary format such as PDF, Word, Excel, etc. anyway.
 
-The Animal element then has child elements for Species (official
-taxonomy), AnimalTags (identifiers), Tests, Vaccinations, and for
-Statements and MiscAttributes that are animal-specific. We will look at
+The `Animal` element then has child elements for `Species` (official
+taxonomy), `AnimalTags` (identifiers), `Tests`, `Vaccinations`, and for
+`Statements` and `MiscAttributes` that are animal-specific. We will look at
 these in detail a little later. Version 3.1 added an element for
-CountryOfBirth.
+`CountryOfBirth`.
 
 ```xml
-<xs:element name = "Animal" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "SpeciesCode" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "SpeciesOther" minOccurs = "1" maxOccurs = "1" /> </xs:choice> <xs:element ref = "AnimalTags" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "CountryOfBirth" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> <xs:attribute name = "Age" type = "AgeType" use = "optional" /> <xs:attribute name = "Breed" type = "xs:string" use = "optional" /> <xs:attribute name = "Sex" type = "SexType" use = "optional" /> <xs:attribute name = "SexDetail" type = "xs:string" use = "optional" /> <xs:attribute name = "InspectionDate" type = "xs:date" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name = "Animal">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref = "SpeciesCode" minOccurs = "1" maxOccurs = "1" />
+        <xs:element ref = "SpeciesOther" minOccurs = "1" maxOccurs = "1" />
+      </xs:choice>
+      <xs:element ref = "AnimalTags" minOccurs = "1" maxOccurs = "1" />
+      <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "CountryOfBirth" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" />
+    </xs:sequence>
+    <xs:attribute name = "Age" type = "AgeType" use = "optional" />
+    <xs:attribute name = "Breed" type = "xs:string" use = "optional" />
+    <xs:attribute name = "Sex" type = "SexType" use = "optional" />
+    <xs:attribute name = "SexDetail" type = "xs:string" use = "optional" />
+    <xs:attribute name = "InspectionDate" type = "xs:date" use = "required" />
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<Animal Age = "2023-02-30" Breed = "Black" Sex = "Female" InspectionDate = "2024-02-11" > <SpeciesCode . . . /> <AnimalTags> . . . </AnimalTags> <Test . . . > . . . </Test> <Vaccination . . . > . . . </Vaccination> <Statements> This one animal has something different from the others. </Statements> </Animal>
+<Animal Age = "2023-02-30" Breed = "Black" Sex = "Female" InspectionDate = "2024-02-11">
+  <SpeciesCode . . . />
+  <AnimalTags> . . . </AnimalTags>
+  <Test . . . > . . . </Test>
+  <Vaccination . . . > . . . </Vaccination>
+  <Statements> This one animal has something different from the others. </Statements>
+</Animal>
 ```
 
 ### GroupLot
 
-GroupLot is the element used for all animals that _do not_ have
+`GroupLot` is the element used for all animals that _do not_ have
 individual official identification on the CVI. The federal rules for
 what do and do not require official identification on CVIs is way more
 complicated that we can cover here. See 9CFR86 and other official
 sources, including InterstateLivestock.com for help. Probably the most
-important part of this element is the Description attribute that is
+important part of this element is the `Description` attribute that is
 required and must include the exemption to individual official animal
 identifiers in a simple string. Other than the species, everything else
 is optional, not because it is not needed but because of variation
 between what is needed for various types of groups.
 
-Quantity is a floating-point number, which makes no sense at all for the
+`Quantity` is a floating-point number, which makes no sense at all for the
 usual case of a truck load of calves, etc. Those would always be whole
 numbers. Other types of groups might be measured in tons, etc. If the
 quantity is anything other than a simple number of animals, the
-attribute Unit should be filled in with a simple xs:string stating the
+attribute Unit should be filled in with a simple `xs:string` stating the
 units. Schema language does not enforce this requirement, but it would
 make no sense to send something like “14.5” without telling what that
 measured.
 
-Age is the AgeType the same as we saw in Animal. Because this applies to
+`Age` is the `AgeType` the same as we saw in `Animal`. Because this applies to
 the entire group, if all animals on the CVI are not the same age, to the
-precision in the age units, then multiple GroupLot elements will be
+precision in the age units, then multiple `GroupLot` elements will be
 needed. This can often be handled by using the inequality symbol for
-less than for example “\&lt;6mo” for less than 6-month-old calves. There
+less than for example `“&lt;6mo”` for less than 6-month-old calves. There
 is one of those XML entities we mentioned earlier. This of course should
-extract as “\<6mo” by the time a human reads it.
+extract as `“<6mo”` by the time a human reads it.
 
-The Breed attribute is the same as in the Animal element. This is
+The `Breed` attribute is the same as in the `Animal` element. This is
 another place where multiple groups may be required if members are of
 different breeds and those are or need to be included on the CVI.
 
-Sex is defined with a slightly different variation from SexType in the
-Animal element. GroupSexType adds the value “Mixed Group.” Before using
+`Sex` is defined with a slightly different variation from `SexType` in the
+`Animal` element. `GroupSexType` adds the value “Mixed Group.” Before using
 this value, veterinarians should be certain that regulations do not vary
 by sex. There is nothing the schema can do and little the eCVI developer
 can do to prevent mixing groups with different regulatory requirements.
 But a good system will make it clear that they can and should be split
 if necessary.
 
-The same rule applies to use of “Other” and SexDetail as applied in the
+The same rule applies to use of “Other” and `SexDetail` as applied in the
 Animal element.
 
-I have already discussed the Description attribute. This can duplicate
+I have already discussed the `Description` attribute. This can duplicate
 some but must not replace information from structured child elements and
 attributes. This is the human-readable description and must include the
-reason these are not in individual Animal elements. So, you might have
+reason these are not in individual `Animal` elements. So, you might have
 “Load of 25 hereford calves less than 6 months of age” that duplicates
 species, breed, quantity, and age, but is needed to explain the
 exemption.
 
-The InspectionDate attribute is listed as optional in the schema. This
+The `InspectionDate` attribute is listed as optional in the schema. This
 will be required in the real-world in most if not all cases.
 
-The list of child elements is almost the same as in the Animal element.
+The list of child elements is almost the same as in the `Animal` element.
 
-The first element is the same choice of SpeciesCode or SpeciesOther as
-in Animal with the same rules about use of “other.” It is important to
+The first element is the same choice of `SpeciesCode` or `SpeciesOther` as
+in `Animal` with the same rules about use of “other.” It is important to
 note that just because description may include the species in text form,
 the structured species code is still required.
 
-GroupLotID is a simple xs:string element that may occur zero to many
+`GroupLotID` is a simple `xs:string` element that may occur zero to many
 times. So, at the data level, this is simple. At the real-world level,
 it gets much more interesting. USDA regulations for Group Identification
 Number (GIN) get very complicated. Other group movements are allowed for
 specific species and identifier types. In some cases, groups may even be
-combined. That is when multiple GroupLotIDs might be needed. This is
+combined. That is when multiple `GroupLotID`s might be needed. This is
 _not_ there to allow identification of a group by listing individual
 animal IDs. Those must go in individual Animal elements.
 
-The Test, Vaccination, Statements, and MiscAttribute elements are all
-the same as in the Animal element with the added requirement that any
+The `Test`, `Vaccination`, `Statements`, and `MiscAttribute` elements are all
+the same as in the `Animal` element with the added requirement that any
 values here must apply to all animals in the group or to the group as a
 whole. Accessions, tests, and vaccinations will be covered in more
 detail in a later section. Version 3.1 added an element for
-CountryOfBirth.
+`CountryOfBirth`.
 
 ```xml
-<xs:element name = "GroupLot" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "SpeciesCode" /> <xs:element ref = "SpeciesOther" /> </xs:choice> <xs:element name = "GroupLotID" type = "xs:string" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "CountryOfBirth" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> <xs:attribute name = "Quantity" type = "xs:float" use = "optional" /> <xs:attribute name = "Unit" type = "xs:string" use = "optional" default = "Number" /> <xs:attribute name = "Age" type = "AgeType" use = "optional" /> <xs:attribute name = "Breed" type = "xs:string" use = "optional" /> <xs:attribute name = "Sex" type = "GroupSexType" use = "optional" /> <xs:attribute name = "SexDetail" type = "xs:string" use = "optional" /> <xs:attribute name = "Description" type = "nonNullString" use = "required" /> <xs:attribute name = "InspectionDate" type = "xs:date" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name = "GroupLot">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref = "SpeciesCode" />
+        <xs:element ref = "SpeciesOther" />
+      </xs:choice>
+      <xs:element name = "GroupLotID" type = "xs:string" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "CountryOfBirth" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" />
+    </xs:sequence>
+    <xs:attribute name = "Quantity" type = "xs:float" use = "optional" />
+    <xs:attribute name = "Unit" type = "xs:string" use = "optional" default = "Number" />
+    <xs:attribute name = "Age" type = "AgeType" use = "optional" />
+    <xs:attribute name = "Breed" type = "xs:string" use = "optional" />
+    <xs:attribute name = "Sex" type = "GroupSexType" use = "optional" />
+    <xs:attribute name = "SexDetail" type = "xs:string" use = "optional" />
+    <xs:attribute name = "Description" type = "nonNullString" use = "required" />
+    <xs:attribute name = "InspectionDate" type = "xs:date" use = "optional" />
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<GroupLot Quantity = "50" Age = "5mo" Breed = "AN" Sex = "Mixed Group" Description = "Beef calves under six months of age" > <SpeciesCode Code = "BEF" /> <GroupLotID> 1234 </GroupLotID> <Test . . . > . . . </Test> <Vaccination . . . > . . . </Vaccination> <Statements> No cases of nose and tail disease in this or adjacent counties. </Statements> </GroupLot>
+<GroupLot Quantity = "50" Age = "5mo" Breed = "AN" Sex = "Mixed Group" Description = "Beef calves under six months of age">
+  <SpeciesCode Code = "BEF" />
+  <GroupLotID> 1234 </GroupLotID>
+  <Test . . . > . . . </Test>
+  <Vaccination . . . > . . . </Vaccination>
+  <Statements> No cases of nose and tail disease in this or adjacent counties. </Statements>
+</GroupLot>
 ```
 
 ### Product
@@ -1971,24 +2292,52 @@ list of covered products is: “Embryos”, “Hatching Eggs”, “Liquid Egg
 “Milk (Raw)”, “Mohair/Cashmere”, “Shell Eggs (Nest Run)”, “Shell Eggs
 (Washed/Sanitized)”, “Shells/Inedible Egg Product”, “Semen”, and “Wool”.
 
-Looking at the schema definition of the Product element, you will find
-it very similar to GroupLot. That is not an accident. It was done in the
+Looking at the schema definition of the `Product` element, you will find
+it very similar to `GroupLot`. That is not an accident. It was done in the
 spirit of supporting re-use of as much development infrastructure as
 possible. Certain attributes and elements may make no sense combined
 with some commodity types but be essential in others.
 
-The only always-required parts of the Product element are the
-ProductType and Description attributes, and the SpeciesCode or
-SpeciesOther element. Quantity and Unit are optional but very likely
-essential. The floating-point number value for Quantity makes more sense
-in this context than it did in GroupLot.
+The only always-required parts of the `Product` element are the
+`ProductType` and `Description` attributes, and the `SpeciesCode` or
+`SpeciesOther` element. `Quantity` and `Unit` are optional but very likely
+essential. The floating-point number value for `Quantity` makes more sense
+in this context than it did in `GroupLot`.
 
 ```xml
-<xs:element name = "Product" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "SpeciesCode" /> <xs:element ref = "SpeciesOther" /> </xs:choice> <xs:element name = "ProductID" type = "xs:string" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" /> <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" /> <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" /> </xs:sequence> <xs:attribute name = "ProductType" type = "CommodityType" use = "required" /> <xs:attribute name = "Quantity" type = "xs:float" use = "optional" /> <xs:attribute name = "Unit" type = "xs:string" use = "optional" default = "Number" /> <xs:attribute name = "Breed" type = "xs:string" use = "optional" /> <xs:attribute name = "Description" type = "nonNullString" use = "required" /> <xs:attribute name = "InspectionDate" type = "xs:date" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name = "Product">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref = "SpeciesCode" />
+        <xs:element ref = "SpeciesOther" />
+      </xs:choice>
+      <xs:element name = "ProductID" type = "xs:string" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Test" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Vaccination" minOccurs = "0" maxOccurs = "unbounded" />
+      <xs:element ref = "Statements" minOccurs = "0" maxOccurs = "1" />
+      <xs:element ref = "MiscAttribute" minOccurs = "0" maxOccurs = "unbounded" />
+    </xs:sequence>
+    <xs:attribute name = "ProductType" type = "CommodityType" use = "required" />
+    <xs:attribute name = "Quantity" type = "xs:float" use = "optional" />
+    <xs:attribute name = "Unit" type = "xs:string" use = "optional" default = "Number" />
+    <xs:attribute name = "Breed" type = "xs:string" use = "optional" />
+    <xs:attribute name = "Description" type = "nonNullString" use = "required" />
+    <xs:attribute name = "InspectionDate" type = "xs:date" use = "optional" />
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<Product ProductType = "Semen" Quantity = "25" Unit = "Straws" Breed = "AN" Description = "Purebred Frozen Yak Semen" InspectionDate = "2024-02-05" > <SpeciesOther Code = "OTH" Text = "Yak" /> <ProductID> HCELE5Nr3 </ProductID> <Test . . . > . . . </Test> <Statements> Has met all Yak semen requirements </Statements> <MiscAttribute Name = " Liquid Nitrogen Qty " Value = " 0.75l " /> </Product>
+<Product ProductType = "Semen" Quantity = "25" Unit = "Straws" Breed = "AN" Description = "Purebred Frozen Yak Semen" InspectionDate = "2024-02-05">
+  <SpeciesOther Code = "OTH" Text = "Yak" />
+  <ProductID> HCELE5Nr3 </ProductID>
+  <Test . . . >
+    . . .
+  </Test>
+  <Statements> Has met all Yak semen requirements </Statements>
+  <MiscAttribute Name = " Liquid Nitrogen Qty " Value = " 0.75l " />
+</Product>
 ```
 
 ## Closer Look at Some Complex Child Elements
