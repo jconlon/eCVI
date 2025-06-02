@@ -484,7 +484,7 @@ content may be additional elements or text.
 
 Attributes provide additional information about elements. They are
 included within the opening tag and are defined as name-value pairs. For
-example, \<person age="30"\>John Doe\</person\> represents an element
+example, `<person age="30">John Doe</person>` represents an element
 person with an attribute age having a value of “30”.
 
 Because the tags in XML define the elements’ meaning, XML makes an ideal
@@ -508,7 +508,32 @@ The names of the elements in the schema itself—starting with xs:-- are
 what tell the computer (parser) what E, A, B, c, and d _are_.
 
 ```xml
-<xs:element name = "E" > <xs:complexType> <xs:sequence> <xs:element name = "A" /> <xs:element name = "B" /> </xs:sequence> <xs:attribute name = "c" /> <xs:attribute name = "d" /> </xs:complexType> </xs:element>
+<xs:element name = "E" >
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name = "A" />
+      <xs:element name = "B" />
+    </xs:sequence>
+    <xs:attribute name = "c" />
+    <xs:attribute name = "d" />
+  </xs:complexType>
+</xs:element>
+```
+
+EDITOR NOTE: Shouldn't the above include types?
+
+```xml
+<xs:element name="E">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="A" type="xs:string"/>
+      <xs:element name="B" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="c" type="xs:string"/>
+    <xs:attribute name="d" type="xs:string"/>
+  </xs:complexType>
+</xs:element>
+
 ```
 
 The next box has three examples of XML document content. They are all
@@ -517,12 +542,23 @@ in the schema above. The second one is missing the element B. The third
 one has an extra attribute f.
 
 ```xml
-<E c = "1" d = "2" > <A> 3 </A> <B> 4 </B> </E> <E c = "1" d = "2" > <A> 3 </A> </E> <E c = "1" d = "2" f = "5" > <A> 3 </A> <B> 4 </B> </E>
+<E c="1" d="2">
+  <A>3</A>
+  <B>4</B>
+</E>
+<E c="1" d="2">
+  <A>3</A>
+</E>
+<E c="1" d="2" f="5">
+  <A>3</A>
+  <B>4</B>
+</E>
+
 ```
 
 Some XML elements may be empty. That is, they may have no text or child
 elements, but only attributes. Such elements have only one tag that ends
-with a slash character such as \<emptyElement attr="true"/\>. The only
+with a slash character such as `<emptyElement attr="true"/>`. The only
 data the element named emptyElement gives us is that the attribute
 called attr is true.
 
