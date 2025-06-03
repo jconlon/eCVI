@@ -1932,9 +1932,9 @@ Origin>
   <Country> USA </Country>
 </Address>
 <StateZoneOrAreaStatus>
-  <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)" />
+  <TuberculosisStateOrZoneStatus Status = "Modified Accredited Advanced State or Zone (MAA)"/>
 </StateZoneOrAreaStatus>
-<HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free " />
+<HerdOrFlockStatus Disease = " Brucellosis " HerdOrFlockID = "FS7bwxJTj" Status = " Free "/>
 <Person>
   <Name> Polly PremOwner </Name>
   <Phone Number = "7338812262" />
@@ -2330,13 +2330,13 @@ in this context than it did in `GroupLot`.
 
 ```xml
 <Product ProductType = "Semen" Quantity = "25" Unit = "Straws" Breed = "AN" Description = "Purebred Frozen Yak Semen" InspectionDate = "2024-02-05">
-  <SpeciesOther Code = "OTH" Text = "Yak" />
-  <ProductID> HCELE5Nr3 </ProductID>
-  <Test . . . >
+  <SpeciesOther Code="OTH" Text="Yak"/>
+  <ProductID>HCELE5Nr3</ProductID>
+  <Test . . .>
     . . .
   </Test>
-  <Statements> Has met all Yak semen requirements </Statements>
-  <MiscAttribute Name = " Liquid Nitrogen Qty " Value = " 0.75l " />
+  <Statements>Has met all Yak semen requirements</Statements>
+  <MiscAttribute Name="Liquid Nitrogen Qty" Value="0.75l"/>
 </Product>
 ```
 
@@ -2356,11 +2356,40 @@ during development to clarify meaning when read by humans on either end
 of the transaction.
 
 ```xml
-<xs:element name = "SpeciesCode" > <xs:complexType> <xs:attribute name = "Code" type = "SpeciesCodes" use = "required" /> <xs:attribute name = "Text" type = "xs:string" use = "optional" /> </xs:complexType> </xs:element> <xs:element name = "SpeciesOther" > <xs:complexType> <xs:attribute name = "Code" default = "OTH" use = "optional" /> <xs:attribute name = "Text" type = "nonNullString" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name="SpeciesCode">
+  <xs:complexType>
+    <xs:attribute name="Code" type="SpeciesCodes" use="required" />
+    <xs:attribute name="Text" type="xs:string" use="optional" />
+  </xs:complexType>
+</xs:element>
+<xs:element name="SpeciesOther">
+  <xs:complexType>
+    <xs:attribute name="Code" default="OTH" use="optional" />
+    <xs:attribute name="Text" type="nonNullString" use="required" />
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<Animal . . . > <SpeciesCode Code = "B EF " /> . . . </Animal> <Animal . . . > <SpeciesCode Code = " DAI " Text = " Dairy Cattle " /> . . . </Animal> <Animal . . . > <Species Other Text = " Aardvark " /> . . . </Animal> <Animal . . . > <Species Other Code = " OTH " Text = " Aardvark " /> . . . </Animal>
+<Animal ...>
+  <SpeciesCode Code="BEF"/>
+  ...
+</Animal>
+
+<Animal ...>
+  <SpeciesCode Code="DAI" Text="Dairy Cattle"/>
+  ...
+</Animal>
+
+<Animal ...>
+  <SpeciesOther Text="Aardvark"/>
+  ...
+</Animal>
+
+<Animal ...>
+  <SpeciesOther Code="OTH" Text="Aardvark"/>
+  ...
+</Animal>
 ```
 
 ### AnimalTags
@@ -2428,7 +2457,25 @@ capability of schema language to enforce, so this attribute is a simple
 string.
 
 ```xml
-<xs:element name = "AnimalTags" > <xs:complexType> <xs:sequence minOccurs = "1" maxOccurs = "unbounded" > <xs:choice> <xs:element ref = "AIN" /> <xs:element ref = "MfrRFID" /> <xs:element ref = "InternationalAIN" /> <xs:element ref = "OfficialIntRFID" /> <xs:element ref = "NUES9" /> <xs:element ref = "NUES8" /> <xs:element ref = "OtherOfficialID" /> <xs:element ref = "ManagementID" /> <xs:element ref = "BrandImage" /> <xs:element ref = "EquineDescription" /> <xs:element ref = "EquinePhotographs" /> </xs:choice> </xs:sequence> </xs:complexType> </xs:element>
+<xs:element name="AnimalTags">
+  <xs:complexType>
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element ref="AIN"/>
+        <xs:element ref="MfrRFID"/>
+        <xs:element ref="InternationalAIN"/>
+        <xs:element ref="OfficialIntRFID"/>
+        <xs:element ref="NUES9"/>
+        <xs:element ref="NUES8"/>
+        <xs:element ref="OtherOfficialID"/>
+        <xs:element ref="ManagementID"/>
+        <xs:element ref="BrandImage"/>
+        <xs:element ref="EquineDescription"/>
+        <xs:element ref="EquinePhotographs"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
 ```
 
 The last two defined identifier types I discuss, BrandImage and
@@ -2455,26 +2502,49 @@ identifier is later but for now just know that it must match the ID in
 one and only one Binary element.
 
 ```xml
-<xs:element name = "EquinePhotographs" > <xs:complexType> <xs:sequence> <xs:element name = "Photograph" minOccurs = "1" maxOccurs = "3" > <xs:complexType> <xs:attribute name = "ImageRef" type = "xs:IDREF" use = "required" /> <xs:attribute name = "View" type = "PhotoView" use = "optional" /> </xs:complexType> </xs:element> </xs:sequence> </xs:complexType> </xs:element>
+<xs:element name="EquinePhotographs">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Photograph" minOccurs="1" maxOccurs="3">
+        <xs:complexType>
+          <xs:attribute name="ImageRef" type="xs:IDREF" use="required"/>
+          <xs:attribute name="View" type="PhotoView" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
 ```
 
-The View attribute in EquinePhotographs is defined by the simple type
-PhotoView and can be “Left”, “Front”, or “Right”.
+The View attribute in EquinePhotographs is defined by the simple type PhotoView and can be “Left”, “Front”, or “Right”.
 
-BrandImage is very similar except that it is just one element with two
-attributes. The BrandImageRef attribute works just like ImageRef in
-Photograph. It points to the binary representation of the brand. An
-additional attribute Description is optional.
+BrandImage is very similar except that it is just one element with two attributes. The BrandImageRef attribute works just like ImageRef in Photograph. It points to the binary representation of the brand. An additional attribute Description is optional.
 
 ```xml
-<xs:element name = "BrandImage" > <xs:complexType> <xs:attribute name = "BrandImageRef" type = "xs:IDREF" use = "required" /> <xs:attribute name = "Description" type = "xs:string" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="BrandImage">
+  <xs:complexType>
+    <xs:attribute name="BrandImageRef" type="xs:IDREF" use="required"/>
+    <xs:attribute name="Description" type="xs:string" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
-This example Animal is a bit silly but shows three of the AnimalTags
-element types.
+This example Animal is a bit silly but shows three of the AnimalTags element types.
 
 ```xml
-<Animal . . . > . . . <AnimalTags> <BrandImage BrandImageRef = "ID002" Description = " Double J Ranch Brand " /> <MfrRFID Number = "914709631860503" /> <EquinePhotographs> <Photograph ImageRef = "ID004" View = "Left" /> <Photograph ImageRef = "ID005" View = "Front" /> <Photograph ImageRef = "ID006" View = "Right" /> </EquinePhotographs> </AnimalTags> . . .
+<Animal ...>
+  ...
+  <AnimalTags>
+    <BrandImage BrandImageRef="ID002" Description="Double J Ranch Brand"/>
+    <MfrRFID Number="914709631860503"/>
+    <EquinePhotographs>
+      <Photograph ImageRef="ID004" View="Left"/>
+      <Photograph ImageRef="ID005" View="Front"/>
+      <Photograph ImageRef="ID006" View="Right"/>
+    </EquinePhotographs>
+  </AnimalTags>
+  ...
+</Animal>
 ```
 
 ### Accession
@@ -2523,13 +2593,28 @@ probably necessary, and once again, that is because of gradual changes
 over the years, not changing things that are ugly but not broken.
 
 ```xml
-<xs:element name = "Accession" > <xs:complexType> <xs:sequence> <xs:choice> <xs:element ref = "Laboratory" minOccurs = "1" maxOccurs = "1" /> <xs:element ref = "Field" minOccurs = "1" maxOccurs = "1" /> </xs:choice> </xs:sequence> <xs:attribute name = "InfieldTest" type = "xs:boolean" use = "optional" default = "false" /> <xs:attribute name = "id" type = "xs:ID" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name="Accession">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element ref="Laboratory" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="Field" minOccurs="1" maxOccurs="1"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="InfieldTest" type="xs:boolean" use="optional" default="false"/>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
 <Accessions>
-  <Accession InfieldTest="true" id="ID001"> . . . </Accession>
-  <Accession InfieldTest="false" id="ID003"> . . . </Accession>
+  <Accession InfieldTest="true" id="ID001">
+    ...
+  </Accession>
+  <Accession InfieldTest="false" id="ID003">
+    ...
+  </Accession>
 </Accessions>
 ```
 
@@ -2547,7 +2632,17 @@ of the InternationalAddress type on the off chance that the lab is
 outside the US.
 
 ```xml
-<xs:element name = "Laboratory" > <xs:complexType> <xs:sequence> <xs:element name = "LabName" type = "xs:string" minOccurs = "1" maxOccurs = "1" /> <xs:element name = "PremId" type = "PremIdType" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Address" type = "InternationalAddress" minOccurs = "0" maxOccurs = "1" /> </xs:sequence> <xs:attribute name = "AccessionDate" type = "xs:date" use = "required" /> <xs:attribute name = "AccessionNumber" type = "nonNullString" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name="Laboratory">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="LabName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Address" type="InternationalAddress" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+    <xs:attribute name="AccessionNumber" type="nonNullString" use="required"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
@@ -2578,11 +2673,34 @@ PremId, and Address. Address, in this case, is limited to a US physical
 address to define where the testing took place.
 
 ```xml
-<xs:element name = "Field" > <xs:complexType> <xs:sequence> <xs:element name = "PremId" type = "PremIdType" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "Address" type = "USAddress" minOccurs = "0" maxOccurs = "1" /> </xs:sequence> <xs:attribute name = "AccessionDate" type = "xs:date" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name="Field">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="PremId" type="PremIdType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Address" type="USAddress" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="AccessionDate" type="xs:date" use="required"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<Accessions> <Accession InfieldTest = "true" id = "ID001" > <Field AccessionDate = "2021-12-29" > <PremId> T6BO2H9 </PremId> <Address> <Line1> 123 Farm Drive </Line1> <Town> Sometown </Town> < County > Fairlain </ County > <State> AL </State> <ZIP> 79474 </ZIP> <Country> USA </Country> <GeoPoint Latitude = "24.487" Longitude = "-17.197" /> </Address> </Field> </Accession> </Accessions>
+<Accessions>
+  <Accession InfieldTest="true" id="ID001">
+    <Field AccessionDate="2021-12-29">
+      <PremId>T6BO2H9</PremId>
+      <Address>
+        <Line1>123 Farm Drive</Line1>
+        <Town>Sometown</Town>
+        <County>Fairlain</County>
+        <State>AL</State>
+        <ZIP>79474</ZIP>
+        <Country>USA</Country>
+        <GeoPoint Latitude="24.487" Longitude="-17.197"/>
+      </Address>
+    </Field>
+  </Accession>
+</Accessions>
 ```
 
 The Accession information having been entered at the eCVI level later
@@ -2626,7 +2744,23 @@ imply, they have defined data types of xs:integer, xs:string, and
 xs:float.
 
 ```xml
-<xs:element name = "Result" minOccurs = "1" maxOccurs = "unbounded" > <xs:complexType> <xs:choice> <xs:element name = "ResultInteger" type = "xs:integer" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "ResultString" type = "xs:string" minOccurs = "0" maxOccurs = "1" /> <xs:element name = "ResultFloat" type = "xs:float" minOccurs = "0" maxOccurs = "1" /> </xs:choice> <xs:attribute name = "ResultName" use = "required" > <xs:simpleType> <xs:restriction base = "xs:string" > <xs:enumeration value = "RESULT" /> <xs:enumeration value = "COMMENT" /> </xs:restriction> </xs:simpleType> </xs:attribute> </xs:complexType> </xs:element>
+<xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element name="ResultInteger" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ResultString" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ResultFloat" type="xs:float" minOccurs="0" maxOccurs="1"/>
+    </xs:choice>
+    <xs:attribute name="ResultName" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="RESULT"/>
+          <xs:enumeration value="COMMENT"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+</xs:element>
 ```
 
 The last child element of Test is either DiseaseCode or DiseaseOther.
@@ -2639,7 +2773,19 @@ while in DiseaseOther the code is fixed as “OTH”. And in DiseaseCode,
 the Text is optional while in DiseaseOther it is required.
 
 ```xml
-<xs:element name = "Test" > <xs:complexType> <xs:sequence> <xs:element name = "Result" . . . > <xs:choice minOccurs = "1" maxOccurs = " unbounded " > <xs:element ref = "DiseaseCode" /> <xs:element ref = "DiseaseOther" /> </xs:choice> </xs:sequence> <xs:attribute name = "AccessionRef" type = "xs:IDREF" use = "required" / > <xs:attribute name = "TestType" type = "nonNullString" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="Test">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Result" .../>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element ref="DiseaseCode"/>
+        <xs:element ref="DiseaseOther"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="AccessionRef" type="xs:IDREF" use="required"/>
+    <xs:attribute name="TestType" type="nonNullString" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 As of version 3.0 of the eCVI standard, the diseases listed in
@@ -2697,7 +2843,16 @@ The choice of disease works the same way as in test, it may be
 DiseaseCode or DiseaseOther with the same list of disease codes.
 
 ```xml
-<xs:element name = "Vaccination" > <xs:complexType> <xs:choice minOccurs = "1" maxOccurs = "1" > <xs:element ref = "DiseaseCode" /> <xs:element ref = "DiseaseOther" /> </xs:choice> <xs:attribute name = "VaccineType" type = "nonNullString" use = "optional" /> <xs:attribute name = "Date" type = "xs:date" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="Vaccination">
+  <xs:complexType>
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element ref="DiseaseCode"/>
+      <xs:element ref="DiseaseOther"/>
+    </xs:choice>
+    <xs:attribute name="VaccineType" type="nonNullString" use="optional"/>
+    <xs:attribute name="Date" type="xs:date" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
@@ -2725,11 +2880,16 @@ readily available. Finding the ISO three letter alpha code might take a
 trip to Wikipedia.
 
 ```xml
-<xs:element name = "CountryOfBirth" > <xs:complexType> <xs:attribute name = "ForeignBorn" type = "xs:boolean" use = "required" /> <xs:attribute name = "CountryCode" type = "ISOCountryCode" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="CountryOfBirth">
+  <xs:complexType>
+    <xs:attribute name="ForeignBorn" type="xs:boolean" use="required"/>
+    <xs:attribute name="CountryCode" type="ISOCountryCode" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-< CountryOfBirth ForeignBorn = " true " CountryCode = " 028 " / >
+<CountryOfBirth ForeignBorn="true" CountryCode="028"/>
 ```
 
 ### Attachment
@@ -2771,11 +2931,33 @@ The optional xs:string attribute Comment can be very helpful, especially
 in the case of “Other” DocType attachments.
 
 ```xml
-<xs:element name = "Attachment" > <xs:complexType> <xs:attribute name = "AttachmentRef" type = "xs:IDREF" use = "required" /> <xs:attribute name = "DocType" use = "required" > <xs:simpleType> <xs:restriction base = "xs:string" > <xs:enumeration value = "Scanned Paper CVI" / > <xs:enumeration value = "Scanned Test Chart" / > <xs:enumeration value = "PDF CVI" / > <xs:enumeration value = "PDF Test Chart" / > <xs:enumeration value = "Other" / > </xs:restriction> </xs:simpleType> </xs:attribute> <xs:attribute name = "Filename" type = "nonNullString" use = "required" /> <xs:attribute name = "Comment" type = "xs:string" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="Attachment">
+  <xs:complexType>
+    <xs:attribute name="AttachmentRef" type="xs:IDREF" use="required"/>
+    <xs:attribute name="DocType" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Scanned Paper CVI"/>
+          <xs:enumeration value="Scanned Test Chart"/>
+          <xs:enumeration value="PDF CVI"/>
+          <xs:enumeration value="PDF Test Chart"/>
+          <xs:enumeration value="Other"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Filename" type="nonNullString" use="required"/>
+    <xs:attribute name="Comment" type="xs:string" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<Attachment AttachmentRef="ID000" DocType="PDF Test Chart" Filename=" TestsRUs\_1234.pdf ;" Comment=" Some comment "/>
+<Attachment
+  AttachmentRef="ID000"
+  DocType="PDF Test Chart"
+  Filename="TestsRUs_1234.pdf"
+  Comment="Some comment"
+/>
 ```
 
 ### MiscAttribute
@@ -2786,11 +2968,16 @@ unanticipated needs. This element is simply a pair of nonNullStrings,
 Name and Value. Their meaning is left as an exercise for the future.
 
 ```xml
-<xs:element name = "MiscAttribute" > <xs:complexType> <xs:attribute name = "Name" type = "nonNullString" use = "required" /> <xs:attribute name = "Value" type = "nonNullString" use = "required" /> </xs:complexType> </xs:element>
+<xs:element name="MiscAttribute">
+  <xs:complexType>
+    <xs:attribute name="Name" type="nonNullString" use="required"/>
+    <xs:attribute name="Value" type="nonNullString" use="required"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
-<MiscAttribute Name=" SomeNewField " Value=" 42 "/>
+<MiscAttribute Name="SomeNewField" Value="42"/>
 ```
 
 ### Binary
@@ -2853,12 +3040,24 @@ need to be sent in the Binary element because it can go in other
 structured elements.
 
 ```xml
-<xs:element name = "Binary" > <xs:complexType> <xs:sequence> <xs:element name = "Payload" type = "xs:base64Binary" minOccurs = "1" maxOccurs = "1" /> </xs:sequence> <xs:attribute name = "ID" type = "xs:ID" use = "required" /> <xs:attribute name = "MimeType" type = "MimeType" use = "optional" /> </xs:complexType> </xs:element>
+<xs:element name="Binary">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Payload" type="xs:base64Binary" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="ID" type="xs:ID" use="required"/>
+    <xs:attribute name="MimeType" type="MimeType" use="optional"/>
+  </xs:complexType>
+</xs:element>
 ```
 
 ```xml
 <Binary ID="ID000" MimeType="application/pdf">
-  <Payload> JVBERi0xLjYKJeLjz9MKM . . . Pages and pages more . . . M4OQolJUVPRgo= </Payload>
+  <Payload>
+    JVBERi0xLjYKJeLjz9MKM
+    . . . Pages and pages more . . .
+    M4OQolJUVPRgo=
+  </Payload>
 </Binary>
 ```
 
