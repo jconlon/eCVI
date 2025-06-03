@@ -2347,9 +2347,9 @@ make up some of the detailed information carried in the eCVI.
 
 ### SpeciesCode and SpeciesOther
 
-SpeciesCode and SpeciesOther differ only in the requiredness of the two
-attributes Code and Text. For SpeciesCode the code is required and may
-have a text description, while in SpeciesOther the code defaults to
+`SpeciesCode` and `SpeciesOther` differ only in the requiredness of the two
+attributes `Code` and `Text`. For `SpeciesCode` the code is required and may
+have a text description, while in `SpeciesOther` the code defaults to
 “OTH” and it is the text description of the unusual species that is
 required. Inclusion of the optional half in each case is most useful
 during development to clarify meaning when read by humans on either end
@@ -2403,11 +2403,11 @@ ensure the greatest possible compliance with those rules, and correct
 recording of those identifiers. To this end, the AnimalTags element
 includes a lot of very specific detail.
 
-AnimalTags is simply a list of one or more elements that represent
+`AnimalTags` is simply a list of one or more elements that represent
 various animal identification types. Note that the name “animal tags” is
 overly specific because some of these are not in the form of an eartag,
 etc. Most, but not all, of these child elements follow the same pattern
-of a single attribute named Number that contains the identifier, numeric
+of a single attribute named `Number` that contains the identifier, numeric
 or not. The name of the child element indicates the type of identifier,
 and the definition specifies a format pattern (RegEx) that identifiers
 of that type must match. Some legally official animal identification
@@ -2415,10 +2415,10 @@ does not consist of a string of characters that can be called a
 “number.” These include brand images, equine descriptions, and
 equine photographs. Because not all official identifier types lend
 themselves to verifiable pattern matching, there is also an element for
-OtherOfficialID that includes a list of TagTypes to be specified in the
-Type attribute along with the Number attribute.
+`OtherOfficialID` that includes a list of `TagTypes` to be specified in the
+`Type` attribute along with the `Number` attribute.
 
-Version 3.0.1 added an InternationAIN tag type. These are official RFID
+Version 3.0.1 added an `InternationAIN` tag type. These are official RFID
 tags with the first three digits being the ISO country code where they
 were issued.
 
@@ -2428,29 +2428,29 @@ origin but that have lost their tags. “Country of origin” is regulatory
 jargon for the country the animal was born in, so the standard uses more
 plain English “country of birth” in the element that identifies the
 birth country. These tags are normal manufacturer RFID tags but with
-different color and labeling. OfficialIntRFID numbers cannot be
-distinguished from MfrRFID except by the element name so their pattern
-for validation is the same as MfrRFID. It uses the same MfrRFIDType
+different color and labeling. `OfficialIntRFID` numbers cannot be
+distinguished from `MfrRFID` except by the element name so their pattern
+for validation is the same as `MfrRFID`. It uses the same `MfrRFIDType`
 definition.
 
 XML schema language does not provide a means to prevent putting a
-specifically defined animal identifier type into OtherOfficialID with
+specifically defined animal identifier type into `OtherOfficialID` with
 type of “Other” but doing so keeps the schema from being able to do its
 data quality job. If the user selects “AIN” as the identifier type and
 enters only 14 digits, the schema can catch the error. The same in
-OtherOfficialID would remain uncaught and the veterinarian might well
+`OtherOfficialID` would remain uncaught and the veterinarian might well
 get a nasty letter from their state animal health official.
 
-The formally defined identifier types are: AIN, MfrRFID,
-OfficialIntRFID, NUES9, NUES8, ManagementID, EquineDescription,
-EquinePhotographs, and BrandImage. The regular expressions that define
+The formally defined identifier types are: `AIN`, `MfrRFID`,
+`OfficialIntRFID`, `NUES9`, `NUES8`, `ManagementID`, `EquineDescription`,
+`EquinePhotographs`, and `BrandImage`. The regular expressions that define
 the first five of these will be explained in the later section on
 detailed patterns. The last three need a little discussion here.
 
-EquineDescription consists of two xs:string attributes. The first of
+`EquineDescription` consists of two xs:string attributes. The first of
 these, Name, is optional and contains the registered name of the horse,
 if any. But by rule, the registered name is only official if accompanied
-by a description, so the second attribute, Description, is required. In
+by a description, so the second attribute, `Description`, is required. In
 the real-world there are very specific requirements for an equine
 description to be sufficient identification. Those are beyond the
 capability of schema language to enforce, so this attribute is a simple
@@ -2478,28 +2478,28 @@ string.
 </xs:element>
 ```
 
-The last two defined identifier types I discuss, BrandImage and
-EquinePhotographs, are related in that they both involve binary images.
+The last two defined identifier types I discuss, `BrandImage` and
+`EquinePhotographs`, are related in that they both involve binary images.
 Here we will begin discussion of how binary data are handled and then
 cover the Binary element in more detail later.
 
 Sometimes the data in an element is very large or needs to be included
 in multiple locations. In these cases, the content can be included by
 reference to a different location in the document using special XML
-attribute types ID and IDREF. An ID attribute must have a unique value
+attribute types `ID` and `IDREF`. An `ID` attribute must have a unique value
 within the document, allowing for easy identification of specific
-elements. An IDREF is used to reference the ID value of another element.
+elements. An `IDREF` is used to reference the `ID` value of another element.
 The eCVI schema uses this for attachments and other large binary
 content. They are also used for laboratory accessions that may apply to
-many of tests on many animals. Using IDREF avoids repeating the
+many of tests on many animals. Using `IDREF` avoids repeating the
 accession details for each test.
 
-EquinePhotographs is an element that consists of one to three Photograph
+`EquinePhotographs` is an element that consists of one to three `Photograph`
 child elements. Each of these has two attributes: ImageRef and View.
-ImageRef is an xs:IDREF identifier that references (links to) the binary
+ImageRef is an `xs:IDREF` identifier that references (links to) the binary
 image itself near the end of the document. We will get into what this
-identifier is later but for now just know that it must match the ID in
-one and only one Binary element.
+identifier is later but for now just know that it must match the `ID` in
+one and only one `Binary` element.
 
 ```xml
 <xs:element name="EquinePhotographs">
@@ -2516,9 +2516,9 @@ one and only one Binary element.
 </xs:element>
 ```
 
-The View attribute in EquinePhotographs is defined by the simple type PhotoView and can be “Left”, “Front”, or “Right”.
+The `View` attribute in `EquinePhotographs` is defined by the simple type `PhotoView` and can be “Left”, “Front”, or “Right”.
 
-BrandImage is very similar except that it is just one element with two attributes. The BrandImageRef attribute works just like ImageRef in Photograph. It points to the binary representation of the brand. An additional attribute Description is optional.
+`BrandImage` is very similar except that it is just one element with two attributes. The `BrandImageRef` attribute works just like `ImageRef` in `Photograph`. It points to the binary representation of the brand. An additional attribute `Description` is optional.
 
 ```xml
 <xs:element name="BrandImage">
@@ -2529,7 +2529,7 @@ BrandImage is very similar except that it is just one element with two attribute
 </xs:element>
 ```
 
-This example Animal is a bit silly but shows three of the AnimalTags element types.
+This example `Animal` is a bit silly but shows three of the `AnimalTags` element types.
 
 ```xml
 <Animal ...>
@@ -2561,25 +2561,25 @@ anemia (Coggins) testing where each sample gets a unique accession
 number as in human medicine. So here, one accession may have one or many
 tests on one or many animals.
 
-We encounter ID and IDREF again in the way tests are handled. Because
+We encounter `ID` and `IDREF` again in the way tests are handled. Because
 complete information about a laboratory accession or field-testing event
 can be more complicated than just a single string, we’d rather not have
 to duplicate it multiple times for things like herd-testing for
 Brucellosis or TB. Instead, the accession information goes in once and
 is referenced by each test that is part of that accession.
 
-The Accessions element at the root level of the eCVI element is just a
-list of Accession elements. The Accession element contains an optional
-xs:Boolean attribute called InFieldTest that is optional and defaults to
+The `Accessions` element at the root level of the `eCVI` element is just a
+list of `Accession` elements. The `Accession` element contains an optional
+`xs:Boolean` attribute called `InFieldTest` that is optional and defaults to
 “false”. This information is redundant and left over as artifact from
-when before the Laboratory and Field were defined separately.
+when before the `Laboratory` and `Field` were defined separately.
 
-The second, and often only, attribute is named id. Note the variance
+The second, and often only, attribute is named `id`. Note the variance
 from the normal naming convention. Oops. This carried over from very
 early drafts and by the time it was noted fixing it would have created
-work for existing implementers. This attribute is of type xs:ID. This is
+work for existing implementers. This attribute is of type `xs:ID`. This is
 a very special XML type. It is based on the XML type of “nonqualified
-name” (xs:NCName) that gets complicated. And how “nonqualified” gets
+name” (`xs:NCName`) that gets complicated. And how “nonqualified” gets
 abbreviated “NC” is just one of those mysteries. We can oversimplify
 this to just that it must start with a letter and may contain letters,
 digits, and some but not all, punctuation, etc. To be safe and easy,
@@ -2587,8 +2587,8 @@ stick to letters, digits, and maybe the underscore “\_” symbol. The
 second requirement of xs:ID is that it must be unique within the XML
 document.
 
-The Accession element then contains one child element, either Laboratory
-or Field. You may notice that this is one more level of nesting than is
+The `Accession` element then contains one child element, either `Laboratory`
+or `Field`. You may notice that this is one more level of nesting than is
 probably necessary, and once again, that is because of gradual changes
 over the years, not changing things that are ugly but not broken.
 
@@ -2618,17 +2618,17 @@ over the years, not changing things that are ugly but not broken.
 </Accessions>
 ```
 
-The Laboratory element is what most veterinarians think of as an
-“accession.” It contains two required attributes, AccessionDate is an
-xs:date and AccessionNumber is a nonNullString, that is, it may not be
+The `Laboratory` element is what most veterinarians think of as an
+“accession.” It contains two required attributes, `AccessionDate` is an
+`xs:date` and `AccessionNumber` is a `nonNullString`, that is, it may not be
 blank on just whitespace. There are very rare cases in which a
 laboratory accession number does not exist or cannot be obtained. In
 those cases, the string “Not Provided” may be entered. These should be
 very rare.
 
-There is also one required string element for the LabName. It may also
-have elements for the lab’s PIN or LID as PremId and Address, which is
-of the InternationalAddress type on the off chance that the lab is
+There is also one required string element for the `LabName`. It may also
+have elements for the lab’s PIN or LID as `PremId` and `Address`, which is
+of the `InternationalAddress` type on the off chance that the lab is
 outside the US.
 
 ```xml
@@ -2664,12 +2664,12 @@ outside the US.
 </Accessions>
 ```
 
-The Field element is used to capture official testing that does not
+The `Field` element is used to capture official testing that does not
 require submission to a laboratory. The prototype of this is TB skin
-testing. The only required part of the Field element is the
-AccessionDate attribute. The two optional child elements are very
+testing. The only required part of the `Field` element is the
+`AccessionDate` attribute. The two optional child elements are very
 important, however, and should be included if available. They are the
-PremId, and Address. Address, in this case, is limited to a US physical
+`PremId`, and `Address`. `Address`, in this case, is limited to a US physical
 address to define where the testing took place.
 
 ```xml
@@ -2703,8 +2703,8 @@ address to define where the testing took place.
 </Accessions>
 ```
 
-The Accession information having been entered at the eCVI level later
-gets referenced in each Animal and Test to which it applies.
+The `Accession` information having been entered at the eCVI level later
+gets referenced in each `Animal` and `Test` to which it applies.
 
 ### Test
 
@@ -2721,27 +2721,27 @@ includes those details on the reports available at the point of care
 where the CVI is issued. The resulting standard is, of necessity, a
 series of compromises.
 
-The Test element begins with an xs:IDREF attribute named AccessionRef
-that links to an Accession. This tiny detail is what makes the rest of
+The `Test` element begins with an `xs:IDREF` attribute named `AccessionRef`
+that links to an `Accession`. This tiny detail is what makes the rest of
 the compromise work. If all we communicate in the eCVI itself is a
 vague, “Test for disease X was negative,” we may not have sufficient
 precision about the testing to make important decisions. But information
-contained in the Accession allows—admittedly future—interoperability
+contained in the `Accession` allows—admittedly future—interoperability
 with laboratory information integration. For example, the National
 Animal Health Laboratory Network (NAHLN) laboratory result messaging
 protocol contains the same accession and animal information. Using the
 eCVI data to query the NAHLN data would provide a much richer picture of
 the diagnostic information. Realization of this possibility will require
 much broader adoption of both standard protocols, but the foundation is
-being laid in this one little, required, AccessionRef attribute.
+being laid in this one little, required, `AccessionRef` attribute.
 
-The body of the Test element consists of a series of one or more Result
-elements. The Result element has a ResultName attribute that is either
+The body of the `Test` element consists of a series of one or more `Result`
+elements. The `Result` element has a `ResultName` attribute that is either
 “RESULT” or “COMMENT” to distinguish deterministic result values from
 interpretation comments. It then has one of three possible result types,
-ResultInteger, ResultString, or ResultFloat. As these element names
-imply, they have defined data types of xs:integer, xs:string, and
-xs:float.
+`ResultInteger`, `ResultString`, or `ResultFloat`. As these element names
+imply, they have defined data types of `xs:integer`, `xs:string`, and
+`xs:float`.
 
 ```xml
 <xs:element name="Result" minOccurs="1" maxOccurs="unbounded">
@@ -2763,14 +2763,14 @@ xs:float.
 </xs:element>
 ```
 
-The last child element of Test is either DiseaseCode or DiseaseOther.
+The last child element of `Test` is either `DiseaseCode` or DiseaseOther.
 Here is that futureproofing again. The most common tests required are
 included in the list of disease codes, but “other” is again available
 because the list can never be absolutely complete. Both of these have
-the same superficial structure, attributes for Code and Text. But in
-DiseaseCode, the value for Code is constrained to a list of DiseaseType
-while in DiseaseOther the code is fixed as “OTH”. And in DiseaseCode,
-the Text is optional while in DiseaseOther it is required.
+the same superficial structure, attributes for `Code` and `Text`. But in
+`DiseaseCode`, the value for `Code` is constrained to a list of DiseaseType
+while in `DiseaseOther` the code is fixed as “OTH”. And in `DiseaseCode`,
+the `Text` is optional while in `DiseaseOther` it is required.
 
 ```xml
 <xs:element name="Test">
@@ -2801,7 +2801,7 @@ numeric or alphanumeric code to ease adoption. A wise developer will
 implement this list in a way that will ease future additions or changes.
 
 Version 3.1 adds an interesting twist. Note that the choice that allows
-DiseaseCode or DiseaseOther can repeat (“unbounded”). This is to allow
+`DiseaseCode` or `DiseaseOther` can repeat (“unbounded”). This is to allow
 for the rare cases in which one test can be used to detect more than one
 disease. This is _not_ for the more common case of a “test” such as a
 multiplex PCR that is actually a panel in a single tube. Those return
@@ -2813,7 +2813,7 @@ To this point, this compromise structure says nothing of what type of
 test was performed for the disease listed. That information may or may
 not be immediately available to the issuing veterinarian. If it is, this
 information can go back up in the opening tag of the Test element in an
-optional attribute TestType. This is a nonNullString so if provided, it
+optional attribute `TestType`. This is a `nonNullString` so if provided, it
 may not be empty or all white space. It is otherwise unstructured text
 to allow flexibility.
 
@@ -2831,16 +2831,16 @@ to allow flexibility.
 
 ### Vaccination
 
-Each Animal element can also have zero or more Vaccination elements.
-There are similarities to the Test element but somewhat simpler. It has
+Each `Animal` element can also have zero or more `Vaccination` elements.
+There are similarities to the `Test` element but somewhat simpler. It has
 two optional attributes and one child element.
 
-The VaccineType attribute is a nonNullString similar to TestType to
-allow that detail, if known. The VaccineDate is an xs:date attribute
+The `VaccineType` attribute is a `nonNullString` similar to `TestType` to
+allow that detail, if known. The `VaccineDate` is an `xs:date` attribute
 that is also optional.
 
 The choice of disease works the same way as in test, it may be
-DiseaseCode or DiseaseOther with the same list of disease codes.
+`DiseaseCode` or `DiseaseOther` with the same list of disease codes.
 
 ```xml
 <xs:element name="Vaccination">
@@ -2863,16 +2863,16 @@ DiseaseCode or DiseaseOther with the same list of disease codes.
 
 ### CountryOfBirth
 
-Added in version 3.1, each Animal element can also have zero or one
-CountryOfBirth element. If this element is omitted, it is implied to be
+Added in version 3.1, each `Animal` element can also have zero or one
+`CountryOfBirth` element. If this element is omitted, it is implied to be
 a US born animal as it will be in the vast majority of cases.
 
-The ForeignBorn attribute is a Boolean value that will essentially
+The `ForeignBorn` attribute is a `Boolean` value that will essentially
 always be true but would be false if including this element for US born
 animals, which is perfectly legal if it makes programming more
 consistent.
 
-The CountryCode is the three digit ISO country code. This is the same
+The `CountryCode` is the three digit ISO country code. This is the same
 value that makes up the first three digits of an ISO RFID number.
 Because a major use-case for this element is those animals that once had
 official ID from their country of origin, that value will most often be
@@ -2894,21 +2894,21 @@ trip to Wikipedia.
 
 ### Attachment
 
-After the list of Animals, GroupLots, and Products as well as any
-Statements that apply to the whole CVI, there can be any Attachment
+After the list of `Animal`s, `GroupLot`s, and `Product`s as well as any
+`Statements` that apply to the whole CVI, there can be any `Attachment`
 elements. These would be things that get stapled to the paper CVI. In
 the digital world they are “files” in some well-known format. These are
 commonly PDF documents, Excel spreadsheets, etc. The data that would
-when saved to disk be a “file” are encoded in a Binary element at the
-very end of the eCVI. The Attachment element has an xs:IDREF attribute
-AttachmentRef that contains the ID of the attachment Binary element. The
-rest of the Attachment element is there to tell the receiver what the
+when saved to disk be a “file” are encoded in a `Binary` element at the
+very end of the eCVI. The `Attachment` element has an `xs:IDREF` attribute
+`AttachmentRef` that contains the `ID` of the attachment `Binary` element. The
+rest of the `Attachment` element is there to tell the receiver what the
 attachment _is_.
 
-The require attribute DocType tells the type of information in the
+The require attribute `DocType` tells the type of information in the
 attachment. Allowed values are: “Scanned Paper CVI”, “Scanned Test
 Chart”, “PDF CVI”, “PDF Test Chart”, and “Other.” The mime type of the
-file itself will be included in the Binary element. There is a bit of
+file itself will be included in the `Binary` element. There is a bit of
 naming redundancy here. Because images of regulatory paperwork are so
 commonly shared as PDF documents, the names PDF CVI and PDF Test Chart
 are used. Any of these may typically be in Adobe PDF files. The
@@ -2917,7 +2917,7 @@ paper document while the “PDF…” types contain data rendered in PDF
 format. The details of the PDF standard are complicated but beyond the
 scope of this guide.
 
-The FileName attribute is a required nonNullString that, as the name
+The `FileName` attribute is a required `nonNullString` that, as the name
 implies, is the name of the file as it was or will be stored on disk. It
 is best to use filenames that would be universally supported in any
 operating system. Use letters and digits as well as very basic
@@ -2925,10 +2925,10 @@ punctuation such as “\_” and “-”. Avoid other special characters and
 spaces. Pay attention to upper and lower case because some operating
 systems ignore case while others distinguish between them. Many common
 file formats have well accepted extensions such as “.pdf” or “.xlsx”
-that can be helpful in addition to the mime type in the Binary element.
+that can be helpful in addition to the mime type in the `Binary` element.
 
-The optional xs:string attribute Comment can be very helpful, especially
-in the case of “Other” DocType attachments.
+The optional `xs:string` attribute `Comment` can be very helpful, especially
+in the case of “Other” `DocType` attachments.
 
 ```xml
 <xs:element name="Attachment">
@@ -2962,10 +2962,10 @@ in the case of “Other” DocType attachments.
 
 ### MiscAttribute
 
-There isn’t much more to say about the MiscAttribute list that may
+There isn’t much more to say about the `MiscAttribute` list that may
 follow the attachments. These are here mainly for future use and
-unanticipated needs. This element is simply a pair of nonNullStrings,
-Name and Value. Their meaning is left as an exercise for the future.
+unanticipated needs. This element is simply a pair of `nonNullStrings`,
+`Name` and `Value`. Their meaning is left as an exercise for the future.
 
 ```xml
 <xs:element name="MiscAttribute">
@@ -2982,16 +2982,16 @@ Name and Value. Their meaning is left as an exercise for the future.
 
 ### Binary
 
-EquinePhotographs, BrandImages, and Attachments are all binary “files”
-with their content carried in the Binary elements at the end of the
-eCVI. Each Binary element must carry three pieces of information.
+`EquinePhotographs`, `BrandImages`, and `Attachments` are all binary “files”
+with their content carried in the `Binary` elements at the end of the
+`eCVI`. Each `Binary` element must carry three pieces of information.
 
-First, the Binary must uniquely identify itself so it can be referenced
-in one or more of the above elements. The attribute named ID is XML
-datatype xs:ID. We’ve already encountered the xs:NCName datatype in the
-xs:IDREF type. xs:ID is another xs:NCName. The difference is that xs:ID
+First, the `Binary` must uniquely identify itself so it can be referenced
+in one or more of the above elements. The attribute named `ID` is XML
+datatype `xs:ID`. We’ve already encountered the `xs:NCName` datatype in the
+`xs:IDREF` type. `xs:ID` is another `xs:NCName`. The difference is that `xs:ID`
 must be unique across the whole document. It may—actually _must_ to make
-any sense—match one or more xs:IDREF values elsewhere in the document.
+any sense—match one or more `xs:IDREF` values elsewhere in the document.
 This should be a simple identifier in a format that the eCVI application
 can readily maintain uniqueness and easily reference. A common pattern
 is “ID_123” where 123 is a sequence generated internally. Some may want
@@ -3005,8 +3005,8 @@ this a JPEG image or a PDF document or an Excel spreadsheet? What
 _information_ is contained in them was carried in the specific
 referencing elements. Media types are defined on the internet by
 Multipurpose Internet Mail Extensions (MIME) type. These are defined by
-the internet engineering task force RFC\[2\] 6838 and maintained by the
-internet assigned numbers authority (IANA). Whew\!. These consist of two
+the internet engineering task force RFC[^2] 6838 and maintained by the
+internet assigned numbers authority (IANA). Whew!. These consist of two
 parts. The basic type such as “text, “image,” or “application” etc. is
 followed by a slash (/) and a subtype such as jpeg or pdf. For the
 complete list see:
@@ -3014,16 +3014,16 @@ https://www.iana.org/assignments/media-types/media-types.xhtml. Or see a
 more user-friendly list at:
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics\_of\_HTTP/MIME\_types/Common\_types
 
-The mime type of the Binary is carried in the required attribute
+The mime type of the `Binary` is carried in the required attribute
 MimeType. The schema requires both basic type and subtype.
 
-The rest of Binary is its one child element, Payload. Payload is an XML
-datatype xs:base64Binary. Base 64 is a way of encoding the full range of
+The rest of `Binary` is its one child element, Payload. Payload is an XML
+datatype `xs:base64Binary`. Base 64 is a way of encoding the full range of
 binary data in printable characters. It turns three bytes of binary into
 four characters. This was invented for adding attachments to email
 messages—as you can see in the name MIME.
 
-So, the Binary Payload is essentially, one very long string of
+So, the `Binary` `Payload` is essentially, one very long string of
 nonsense-looking letters, digits and the + and / characters. It may have
 = or == at the end. There are many slight variations on base64 encoding.
 The one referred to by xs:base64Binary is defined by RFC 2045 that
@@ -3087,7 +3087,7 @@ would need, “.\*this text.\*” as your pattern. The “.\*” means “any
 number of any characters.” In XML though, we almost always want to test
 the full string against a pattern. So implicit anchoring makes sense.
 
-The xs:SimpleType definitions allow a list of patterns such that values
+The `xs:SimpleType` definitions allow a list of patterns such that values
 that match any of the list are valid. The eCVI standard tries to
 maintain something like readability while constraining valid values.
 Sometimes splitting a complex pattern into a choice of two or three
@@ -3100,16 +3100,20 @@ that is specific to the XML subset of patterns.
 
 #### Phone Number
 
-\\d{10}
+```regex
+\d{10}
+```
 
-The US phone number pattern is a simple “any ten digits.” The “\\d”
+The US phone number pattern is a simple “any ten digits.” The “\d”
 means any digit and the “{10}” means “ten of these.” This could probably
 be tightened up to include only starting with valid area codes but, for
 now, is any ten digits.
 
 #### InternationalPhone Number
 
-(9\[976\]\\d|8\[987530\]\\d|6\[987\]\\d|5\[90\]\\d|42\\d|3\[875\]\\d|2\[98654321\]\\d|9\[8543210\]|8\[6421\]|6\[6543210\]|5\[87654321\]|4\[987654310\]|3\[9643210\]|2\[70\]|7|1)\\d{1,14}
+```regex
+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}
+```
 
 This strange looking sequence expands to define all of the world’s one,
 two and three digit telephone prefix codes followed by one to 14 more
@@ -3118,12 +3122,12 @@ example the prefix we use in the US also covers US territories, Canada,
 and several Caribbean island countries.
 
 Inside the parentheses each segment separated by the | character is one
-choice of sub-pattern. So for example, 9\[976\]\\d means that “99”,
+choice of sub-pattern. So for example, 9[976]\d means that “99”,
 “97”, or “96” followed by any additional digit are all valid
 telephone prefixes somewhere in the world. Further along we get to
-9\[8543210\] that says that “98”, “95”, “94”, “93”, “92”, “91” and “90”
-are all valid two-digit prefixes. Note the lack of a trailing \\d in
-that sub-pattern. Finally, after the parentheses comes \\d{1,14} that
+9[8543210] that says that “98”, “95”, “94”, “93”, “92”, “91” and “90”
+are all valid two-digit prefixes. Note the lack of a trailing \d in
+that sub-pattern. Finally, after the parentheses comes \d{1,14} that
 means that after the prefix may be one to 14 more digits. Because each
 country establishes its own pattern for numbers, this RegEx cannot
 validate every variation, but it will catch many invalid international
@@ -3132,16 +3136,22 @@ the phone number. Here it is not part of the data.
 
 #### ZIP
 
-\\d{5}
+```regex
+\d{5}
+```
 
-\\d{5}-\\d{4}
+```regex
+\d{5}-\d{4}
+```
 
 The ZIP element in the USAddress may match either of two patterns for
 the formatted five digit and nine digit zip codes.
 
 #### nonNullString
 
-.\*\[^\\s\].\*
+```regex
+.*[^\s].*
+```
 
 Where the standard needs to prevent entry of a totally blank string it
 uses nonNullString. This pattern translates to any number of any
@@ -3154,7 +3164,9 @@ part is the \[^\\s\] which expands to “anything (the \[\]) except (the
 
 #### EmailType
 
-\[a-zA-Z0-9.\_%+-\]+@\[a-zA-Z0-9.-\]+\\.\[a-zA-Z\]{2,24}
+```regex
+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,24}
+```
 
 The familiar email address pattern translates to a name plus the @
 symbol plus a domain. The name \[a-zA-Z0-9.\_%+-\]+ means any upper or
@@ -3168,7 +3180,9 @@ followed by two to twenty four upper or lower case letters.
 
 #### PremIdType
 
-\[A-Z0-9\]{6,8}
+```regex
+[A-Z0-9]{6,8}
+```
 
 The RegEx for the standard PIN or LID is very loose. It allows any six,
 seven or eight character string with upper case letters and digits. This
@@ -3178,9 +3192,13 @@ digit explained in Appendix A.
 
 #### AgeType
 
-(\&lt;|\&gt;)? ?\\d{1,3}(\\.\\d+)? ?(d|wk|mo|a)
+```regex
+(&lt;|&gt;)? ?\d{1,3}(\.\d+)? ?(d|wk|mo|a)
+```
 
-(19|20)\\d\\d-(0\[1-9\]|1\[012\])-(0\[1-9\]|\[12\]\\d|3\[01\])
+```regex
+(19|20)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01])
+```
 
 The AgeType can match either of two different RegEx patterns. The first
 is one to three digits optionally preceded by a \< or \> symbol (as XML
@@ -3189,35 +3207,39 @@ followed by one or more digits. That is followed by an optional space
 and an age unit of d, wk, mo, or a; for day, week, month, or year.
 
 The alternative is to provide a date of birth. This RegEx matches the
-format of xs:date. YYYY-MM-DD. Year being constrained to this century
+format of `xs:date`. YYYY-MM-DD. Year being constrained to this century
 and last. So, look out for the Y2.1K bug to appear in the year 2100.
 
 #### AINType
 
-(840)\\d{12}
+```regex
+(840)\d{12}
+```
 
 The US Animal Identification Number (AIN) is defined by the US ISO
 country code 840 followed by twelve additional digits
 
 #### InternationalAINType
 
-((004)|(008)|(010)|(012)|(016)|(020)|(024)|(028)|(031)|(032)|(036)|(040)|(044)|(048)  
-|(050)|(051)|(052)|(056)|(060)|(064)|(068)|(070)|(072)|(074)|(076)|(084)|(086)|(090)|(092)  
-|(096)|(100)|(104)|(108)|(112)|(116)|(120)|(124)|(132)|(136)|(140)|(144)|(148)|(152)|(156)  
-|(158)|(162)|(166)|(170)|(174)|(175)|(178)|(180)|(184)|(188)|(191)|(192)|(196)|(203)|(204)  
-|(208)|(212)|(214)|(218)|(222)|(226)|(231)|(232)|(233)|(234)|(238)|(239)|(242)|(246)|(248)  
-|(250)|(254)|(258)|(260)|(262)|(266)|(268)|(270)|(275)|(276)|(288)|(292)|(296)|(300)|(304)  
-|(308)|(312)|(316)|(320)|(324)|(328)|(332)|(334)|(336)|(340)|(344)|(348)|(352)|(356)|(360)  
-|(364)|(368)|(372)|(376)|(380)|(384)|(388)|(392)|(398)|(400)|(404)|(408)|(410)|(414)|(417)  
-|(418)|(422)|(426)|(428)|(430)|(434)|(438)|(440)|(442)|(446)|(450)|(454)|(458)|(462)|(466)  
-|(470)|(474)|(478)|(480)|(484)|(492)|(496)|(498)|(499)|(500)|(504)|(508)|(512)|(516)|(520)  
-|(524)|(528)|(531)|(533)|(534)|(540)|(548)|(554)|(558)|(562)|(566)|(570)|(574)|(578)|(580)  
-|(581)|(583)|(584)|(585)|(586)|(591)|(598)|(600)|(604)|(608)|(612)|(616)|(620)|(624)|(626)  
-|(630)|(634)|(638)|(642)|(643)|(646)|(652)|(659)|(660)|(662)|(663)|(666)|(670)|(674)|(678)  
-|(682)|(686)|(688)|(690)|(694)|(702)|(703)|(704)|(705)|(706)|(710)|(716)|(724)|(728)|(729)  
-|(732)|(740)|(744)|(748)|(752)|(756)|(760)|(762)|(764)|(768)|(772)|(776)|(780)|(784)|(788)  
-|(792)|(795)|(796)|(798)|(800)|(804)|(807)|(818)|(826)|(831)|(832)|(833)|(834)|(850)|(854)  
-|(858)|(860)|(862)|(876)|(882)|(887)|(894))\\d{12}
+```regex
+((004)|(008)|(010)|(012)|(016)|(020)|(024)|(028)|(031)|(032)|(036)|(040)|(044)|(048)
+|(050)|(051)|(052)|(056)|(060)|(064)|(068)|(070)|(072)|(074)|(076)|(084)|(086)|(090)|(092)
+|(096)|(100)|(104)|(108)|(112)|(116)|(120)|(124)|(132)|(136)|(140)|(144)|(148)|(152)|(156)
+|(158)|(162)|(166)|(170)|(174)|(175)|(178)|(180)|(184)|(188)|(191)|(192)|(196)|(203)|(204)
+|(208)|(212)|(214)|(218)|(222)|(226)|(231)|(232)|(233)|(234)|(238)|(239)|(242)|(246)|(248)
+|(250)|(254)|(258)|(260)|(262)|(266)|(268)|(270)|(275)|(276)|(288)|(292)|(296)|(300)|(304)
+|(308)|(312)|(316)|(320)|(324)|(328)|(332)|(334)|(336)|(340)|(344)|(348)|(352)|(356)|(360)
+|(364)|(368)|(372)|(376)|(380)|(384)|(388)|(392)|(398)|(400)|(404)|(408)|(410)|(414)|(417)
+|(418)|(422)|(426)|(428)|(430)|(434)|(438)|(440)|(442)|(446)|(450)|(454)|(458)|(462)|(466)
+|(470)|(474)|(478)|(480)|(484)|(492)|(496)|(498)|(499)|(500)|(504)|(508)|(512)|(516)|(520)
+|(524)|(528)|(531)|(533)|(534)|(540)|(548)|(554)|(558)|(562)|(566)|(570)|(574)|(578)|(580)
+|(581)|(583)|(584)|(585)|(586)|(591)|(598)|(600)|(604)|(608)|(612)|(616)|(620)|(624)|(626)
+|(630)|(634)|(638)|(642)|(643)|(646)|(652)|(659)|(660)|(662)|(663)|(666)|(670)|(674)|(678)
+|(682)|(686)|(688)|(690)|(694)|(702)|(703)|(704)|(705)|(706)|(710)|(716)|(724)|(728)|(729)
+|(732)|(740)|(744)|(748)|(752)|(756)|(760)|(762)|(764)|(768)|(772)|(776)|(780)|(784)|(788)
+|(792)|(795)|(796)|(798)|(800)|(804)|(807)|(818)|(826)|(831)|(832)|(833)|(834)|(850)|(854)
+|(858)|(860)|(862)|(876)|(882)|(887)|(894))\d{12}
+```
 
 The international AIN is really the same pattern as the US AIN but with
 the twelve additional digits preceded by a choice of ISO country codes
@@ -3227,7 +3249,9 @@ different code list because these actually are country specific.
 
 #### MfrRFIDType
 
-((9\[0-8\]\\d)|(9\\d\[0-8\]))\\d{12}
+```regex
+((9[0-8]\d)|(9\d[0-8]))\d{12}
+```
 
 Manufacturer RFID tags start with three digits starting with 9 and
 excluding 999. The RegEx reads 9 followed by 0 through 8 followed by any
@@ -3236,7 +3260,9 @@ digits are followed by any additional twelve digits.
 
 #### NUES9Type
 
-(\\d{2}|AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|PR|RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)\[A-Z\]{3}\\d{4}
+```regex
+(\d{2}|AL|AK|AZ|AR|CA|CO|CT|DE|DC|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|PR|RI|SC|SD|TN|TX|UT|US|VA|WA|WV|WI|WY)[A-Z]{3}\d{4}
+```
 
 The National Uniform Eartag System (NUES) defines a nine character
 pattern that would be fairly simple except that the first two
@@ -3248,7 +3274,9 @@ three upper case letters and four digits.
 
 #### NUES8Type
 
-\\d{2}\[A-Z\]{2}\\d{4}
+```regex
+\d{2}[A-Z]{2}\d{4}
+```
 
 The NUES8 pattern is easier because the state postal codes are not used.
 It is any two digits followed by any two upper case letters and four
@@ -3256,7 +3284,9 @@ digits.
 
 #### MimeType
 
+```regex
 .{1,127}/.{1,127}
+```
 
 The RegEx for MIME type simply shows that both the basic type and
 subtype are required, separated by a / character. Both halves can be one
@@ -3264,23 +3294,25 @@ to 127 characters.
 
 #### ISOCountryCode
 
-((004)|(008)|(010)|(012)|(016)|(020)|(024)|(028)|(031)|(032)|(036)|(040)|(044)|(048)  
-|(050)|(051)|(052)|(056)|(060)|(064)|(068)|(070)|(072)|(074)|(076)|(084)|(086)|(090)|(092)  
-|(096)|(100)|(104)|(108)|(112)|(116)|(120)|(124)|(132)|(136)|(140)|(144)|(148)|(152)|(156)  
-|(158)|(162)|(166)|(170)|(174)|(175)|(178)|(180)|(184)|(188)|(191)|(192)|(196)|(203)|(204)  
-|(208)|(212)|(214)|(218)|(222)|(226)|(231)|(232)|(233)|(234)|(238)|(239)|(242)|(246)|(248)  
-|(250)|(254)|(258)|(260)|(262)|(266)|(268)|(270)|(275)|(276)|(288)|(292)|(296)|(300)|(304)  
-|(308)|(312)|(316)|(320)|(324)|(328)|(332)|(334)|(336)|(340)|(344)|(348)|(352)|(356)|(360)  
-|(364)|(368)|(372)|(376)|(380)|(384)|(388)|(392)|(398)|(400)|(404)|(408)|(410)|(414)|(417)  
-|(418)|(422)|(426)|(428)|(430)|(434)|(438)|(440)|(442)|(446)|(450)|(454)|(458)|(462)|(466)  
-|(470)|(474)|(478)|(480)|(484)|(492)|(496)|(498)|(499)|(500)|(504)|(508)|(512)|(516)|(520)  
-|(524)|(528)|(531)|(533)|(534)|(540)|(548)|(554)|(558)|(562)|(566)|(570)|(574)|(578)|(580)  
-|(581)|(583)|(584)|(585)|(586)|(591)|(598)|(600)|(604)|(608)|(612)|(616)|(620)|(624)|(626)  
-|(630)|(634)|(638)|(642)|(643)|(646)|(652)|(659)|(660)|(662)|(663)|(666)|(670)|(674)|(678)  
-|(682)|(686)|(688)|(690)|(694)|(702)|(703)|(704)|(705)|(706)|(710)|(716)|(724)|(728)|(729)  
-|(732)|(740)|(744)|(748)|(752)|(756)|(760)|(762)|(764)|(768)|(772)|(776)|(780)|(784)|(788)  
-|(792)|(795)|(796)|(798)|(800)|(804)|(807)|(818)|(826)|(831)|(832)|(833)|(834)|(850)|(854)  
+```regex
+((004)|(008)|(010)|(012)|(016)|(020)|(024)|(028)|(031)|(032)|(036)|(040)|(044)|(048)
+|(050)|(051)|(052)|(056)|(060)|(064)|(068)|(070)|(072)|(074)|(076)|(084)|(086)|(090)|(092)
+|(096)|(100)|(104)|(108)|(112)|(116)|(120)|(124)|(132)|(136)|(140)|(144)|(148)|(152)|(156)
+|(158)|(162)|(166)|(170)|(174)|(175)|(178)|(180)|(184)|(188)|(191)|(192)|(196)|(203)|(204)
+|(208)|(212)|(214)|(218)|(222)|(226)|(231)|(232)|(233)|(234)|(238)|(239)|(242)|(246)|(248)
+|(250)|(254)|(258)|(260)|(262)|(266)|(268)|(270)|(275)|(276)|(288)|(292)|(296)|(300)|(304)
+|(308)|(312)|(316)|(320)|(324)|(328)|(332)|(334)|(336)|(340)|(344)|(348)|(352)|(356)|(360)
+|(364)|(368)|(372)|(376)|(380)|(384)|(388)|(392)|(398)|(400)|(404)|(408)|(410)|(414)|(417)
+|(418)|(422)|(426)|(428)|(430)|(434)|(438)|(440)|(442)|(446)|(450)|(454)|(458)|(462)|(466)
+|(470)|(474)|(478)|(480)|(484)|(492)|(496)|(498)|(499)|(500)|(504)|(508)|(512)|(516)|(520)
+|(524)|(528)|(531)|(533)|(534)|(540)|(548)|(554)|(558)|(562)|(566)|(570)|(574)|(578)|(580)
+|(581)|(583)|(584)|(585)|(586)|(591)|(598)|(600)|(604)|(608)|(612)|(616)|(620)|(624)|(626)
+|(630)|(634)|(638)|(642)|(643)|(646)|(652)|(659)|(660)|(662)|(663)|(666)|(670)|(674)|(678)
+|(682)|(686)|(688)|(690)|(694)|(702)|(703)|(704)|(705)|(706)|(710)|(716)|(724)|(728)|(729)
+|(732)|(740)|(744)|(748)|(752)|(756)|(760)|(762)|(764)|(768)|(772)|(776)|(780)|(784)|(788)
+|(792)|(795)|(796)|(798)|(800)|(804)|(807)|(818)|(826)|(831)|(832)|(833)|(834)|(850)|(854)
 |(858)|(860)|(862)|(876)|(882)|(887)|(894))
+```
 
 Because the international AIN starts with the ISO country code, this
 pattern is identical to that one except for not including the additional
@@ -4618,13 +4650,16 @@ assessment. Appropriate industry standards will help improve the
 availability and interoperability of workable electronic signature
 solutions.
 
-1.  It is not, however, an ANSI accredited standards development
+[^1]:
+    It is not, however, an ANSI accredited standards development
     organization.
 
-2.  Standards for the Internet started out as “Requests For Comment”
+[^2]:
+    Standards for the Internet started out as “Requests For Comment”
     back in its experimental days and the acronym RFC stuck.
 
-3.  Information Security Committee Electronic Commerce and Information
+[^3]:
+    Information Security Committee Electronic Commerce and Information
     Technology Division Section of Science and Technology American Bar
     Association, _Digital Signature Guidelines; Legal Infrastructure for
     Certification Authorities and Secure Electronic Commerce_, American
