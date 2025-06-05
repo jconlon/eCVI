@@ -4048,131 +4048,83 @@ identical in C\# and similar in Python, etc.
 
 ```java
 public class PremIDCheckSum {
+  private static char[] char36 = {
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+      'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+      'U', 'V', 'W', 'X', 'Y', 'Z', '*'
+  };
 
-private static char\[\] char36 =
-{'0','1','2','3','4','5','6','7','8','9',
+  /**
+   * This class is not instantiable. Only used as static method container.
+   */
+  private PremIDCheckSum() {
+  }
 
-'A','B','C','D','E','F','G','H','I','J',
+  /**
+   * Calculate a checksum character based upon the identifier less checksum
+   *
+   * @param sID String Identifier without checksum
+   * @throws Exception If the identifier contains characters other than
+   *                   digits or capital letters.
+   * @return char Checksum
+   */
+  public static char getChecksum(String sID) throws Exception {
+    int pj = 36;
+    int sj = 0;
 
-'K','L','M','N','O','P','Q','R','S','T',
+    for (int i = 0; i < sID.length(); i++) {
+      char cNext = sID.charAt(i);
+      int iNext = lookup(cNext);
+      if (iNext == -1) {
+        throw new Exception("Character " + cNext + " is not valid in ID");
+      }
+      sj = pj + iNext;
+      sj = sj % 36;
+      if (sj == 0) {
+        sj = 36;
+      }
+      pj = (sj * 2) % 37;
+    }
 
-'U','V','W','X','Y','Z','\*'};
+    sj = (37 - pj) % 36;
+    if (sj < 0 || sj >= char36.length) {
+      throw new Exception("Invalid numerical result: " + sj);
+    }
+    return char36[sj];
+  }
 
-/\*\*
+  /**
+   * Check the identifier with checksum for validity.
+   *
+   * @param sID String Identifier with checksum
+   * @throws Exception If the identifier contains characters other than
+   *                   digits or capital letters.
+   * @return boolean true if last character is correct checksum.
+   */
+  public static boolean isValid(String sID) throws Exception {
+    char cCheckSum2 = sID.charAt(sID.length() - 1);
+    String sID2 = sID.substring(0, sID.length() - 1);
+    char cCheckSum = getChecksum(sID2);
+    return cCheckSum == cCheckSum2;
+  }
 
-\* This class is not instantiable. Only used as static method container.
+  private static int lookup(char cIn) {
+    for (int i = 0; i < char36.length; i++) {
+      if (char36[i] == cIn) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
-\*/
-
-private PremIDCheckSum() {
-
-}
-
-/\*\*
-
-\* Calculate a checksum character based upon the identifier less
-checksum
-
-\* @param sID String Identifier without checksum
-
-\* @throws Exception If the identifier contains characters other than
-
-\* digits or capital letters.
-
-\* @return char Checksum
-
-\*/
-
-public static char getChecksum( String sID ) throws Exception {
-
-int pj = 36;
-
-int sj = 0;
-
-for( int i = 0; i \< sID.length(); i++ ) {
-
-char cNext = sID.charAt(i);
-
-int iNext = lookup( cNext );
-
-if( iNext == -1 ) throw new Exception( "Character " + cNext
-
-\+ " is not valid in ID" );
-
-sj = pj + iNext;
-
-sj = sj % 36; if( sj == 0 ) sj = 36;
-
-pj = ( sj \* 2 ) % 37;
-
-}
-
-sj = ( 37 - pj ) % 36;
-
-if( sj \< 0 || sj \>= char36.length )
-
-throw new Exception( "Invalid numerical result: " + sj );
-
-return char36\[sj\];
-
-}
-
-/\*\*
-
-\* Check the identifier with checksum for validity.
-
-\* @param sID String Identifier with checksum
-
-\* @throws Exception If the identifier contains characters other than
-
-\* digits or capital letters.
-
-\* @return boolean true if last character is correct checksum.
-
-\*/
-
-public static boolean isValid( String sID ) throws Exception {
-
-char cCheckSum2 = sID.charAt( sID.length() -1 );
-
-String sID2 = sID.substring( 0, sID.length() - 1 );
-
-char cCheckSum = getChecksum( sID2 );
-
-return cCheckSum == cCheckSum2;
-
-}
-
-private static int lookup( char cIn ) {
-
-for( int i = 0; i \< char36.length; i++ ) {
-
-if( char36\[i\] == cIn ) return i;
-
-}
-
-return -1;
-
-}
-
-public static void main( String\[\] args ) {
-
-try {
-
-System.out.println( args\[0\]
-
-\+ (isValid(args\[0\])?" is valid":" is not valid") );
-
-} catch (Exception e) {
-
-// TODO Auto-generated catch block
-
-e.printStackTrace();
-
-}
-
-}
-
+  public static void main(String[] args) {
+    try {
+      System.out.println(args[0] + (isValid(args[0]) ? " is valid" : " is not valid"));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }
 ```
 
