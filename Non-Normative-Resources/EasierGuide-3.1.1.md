@@ -3334,14 +3334,14 @@ checking, etc. But these are technically codes in the sense that the
 spelling, punctuation, and capitalization are all required to be exactly
 as they are in the lists.
 
-|                                |                             |
-| ------------------------------ | --------------------------- |
 | **Code (Exact text required)** | **Description or Comments** |
+| ------------------------------ | --------------------------- |
 
 #### MovementPurposes
 
-| Racing                           |                                                                               |
+| Code                             | Description                                                                   |
 | -------------------------------- | ----------------------------------------------------------------------------- |
+| Racing                           |                                                                               |
 | Sale                             |                                                                               |
 | Grazing                          |                                                                               |
 | Training                         |                                                                               |
@@ -3362,8 +3362,9 @@ as they are in the lists.
 
 #### TransportMode
 
-| air   |                                       |
+| Code  | Description                           |
 | ----- | ------------------------------------- |
+| air   |                                       |
 | boat  |                                       |
 | car   |                                       |
 | rail  |                                       |
@@ -3373,8 +3374,9 @@ as they are in the lists.
 
 #### DocType
 
-| Scanned Paper CVI  | Image of a paper CVI, often in PDF form.        |
+| Code               | Description                                     |
 | ------------------ | ----------------------------------------------- |
+| Scanned Paper CVI  | Image of a paper CVI, often in PDF form.        |
 | Scanned Test Chart | Image of a paper test chart, often in PDF form. |
 | PDF CVI            | PDF rendering of an electronic CVI              |
 | PDF Test Chart     | PDF rendering of an electronic test chart       |
@@ -3382,33 +3384,37 @@ as they are in the lists.
 
 #### Type (Phone)
 
-| Unknown | |
-| --------- | |
-| Landline | |
-| Cellphone | |
-| Fax | |
+| Code      | Description |
+| --------- | ----------- |
+| Unknown   |             |
+| Landline  |             |
+| Cellphone |             |
+| Fax       |             |
 
 #### Status (BrucellosisiStateOrAreaStatus)
 
-| Free | |
-| ------------------ | |
-| Class A | |
-| Class B | |
-| Class C | |
-| GYA, DSA (Class A) | |
+| Code               | Description |
+| ------------------ | ----------- |
+| Free               |             |
+| Class A            |             |
+| Class B            |             |
+| Class C            |             |
+| GYA, DSA (Class A) |             |
 
 #### Status (TuberculosisStateOrZoneStatus)
 
-| Free | |
-| ------------------------------------------------ | |
-| Modified Accredited Advanced State or Zone (MAA) | |
-| Modified Accredited State or Zone (MA) | |
-| Non Accredited State or Zone (NA) | |
+| Code                                             | Description |
+| ------------------------------------------------ | ----------- |
+| Free                                             |             |
+| Modified Accredited Advanced State or Zone (MAA) |             |
+| Modified Accredited State or Zone (MA)           |             |
+| Non Accredited State or Zone (NA)                |             |
 
 #### ResultName
 
-| RESULT  | The actual result of the test, often a numeric value or pos/neg |
+| Code    | Description                                                     |
 | ------- | --------------------------------------------------------------- |
+| RESULT  | The actual result of the test, often a numeric value or pos/neg |
 | COMMENT | Interpretation of the test result or other commentary           |
 
 #### TagType
@@ -3417,8 +3423,9 @@ TagType here is just for those identifier types for which there are no
 specified format that can be validated against regular expression
 patterns. Those are all named in defined element types above.
 
-| AMID    | American ID                                                                                                                                |
+| Code    | Description                                                                                                                                |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| AMID    | American ID                                                                                                                                |
 | BT      | Backtag                                                                                                                                    |
 | IMP     | Implant (microchip). If the chip contains an official AIN, it should be in an AIN, or InternationalAIN element rather than OtherOfficialID |
 | NAME    | Animal name when it has value as an identifier                                                                                             |
@@ -3430,98 +3437,104 @@ patterns. Those are all named in defined element types above.
 
 #### SpeciesCodes
 
-| AQU | Aquaculture                             |
-| --- | --------------------------------------- |
-| BEF | Beef Cattle                             |
-| BIS | Bison                                   |
-| CAM | Camelid (Alpacas, Llamas, etc.)         |
-| CAN | Canine                                  |
-| CAP | Caprine (Goats)                         |
-| CER | Cervids                                 |
-| CHI | Chickens                                |
-| DAI | Dairy Cattle                            |
-| EQU | Equine (Horses, Mules, Donkeys, Burros) |
-| FEL | Feline                                  |
-| OVI | Ovine (Sheep)                           |
-| POR | Porcine (Swine)                         |
-| TUR | Turkeys                                 |
+| Code | Description                             |
+| ---- | --------------------------------------- |
+| AQU  | Aquaculture                             |
+| BEF  | Beef Cattle                             |
+| BIS  | Bison                                   |
+| CAM  | Camelid (Alpacas, Llamas, etc.)         |
+| CAN  | Canine                                  |
+| CAP  | Caprine (Goats)                         |
+| CER  | Cervids                                 |
+| CHI  | Chickens                                |
+| DAI  | Dairy Cattle                            |
+| EQU  | Equine (Horses, Mules, Donkeys, Burros) |
+| FEL  | Feline                                  |
+| OVI  | Ovine (Sheep)                           |
+| POR  | Porcine (Swine)                         |
+| TUR  | Turkeys                                 |
 
 #### SexType
 
-| Female | |
-| ------------------ | |
-| Male | |
-| Spayed Female | |
-| Neutered Male | |
-| True Hermaphrodite | |
-| Gender Unknown | |
-| Other | |
+| Code               | Description |
+| ------------------ | ----------- |
+| Female             |             |
+| Male               |             |
+| Spayed Female      |             |
+| Neutered Male      |             |
+| True Hermaphrodite |             |
+| Gender Unknown     |             |
+| Other              |             |
 
 #### GroupSexType
 
-| Female | |
-| ------------------ | |
-| Male | |
-| Spayed Female | |
-| Neutered Male | |
-| True Hermaphrodite | |
-| Mixed Group | |
-| Gender Unknown | |
-| Other | |
+| Code               | Description |
+| ------------------ | ----------- |
+| Female             |             |
+| Male               |             |
+| Spayed Female      |             |
+| Neutered Male      |             |
+| True Hermaphrodite |             |
+| Mixed Group        |             |
+| Gender Unknown     |             |
+| Other              |             |
 
 #### CommodityType
 
-| Embryos | |
-| ----------------------------- | |
-| Hatching Eggs | |
-| Liquid Egg (Non-Pasteurized) | |
-| Liquid Egg (Pasteurized) | |
-| Milk (Pasteurized) | |
-| Milk (Raw) | |
-| Mohair/Cashmere | |
-| Shell Eggs (Nest Run) | |
-| Shell Eggs (Washed/Sanitized) | |
-| Shells/Inedible Egg Product | |
-| Semen | |
-| Wool | |
+| Code                          | Description |
+| ----------------------------- | ----------- |
+| Embryos                       |             |
+| Hatching Eggs                 |             |
+| Liquid Egg (Non-Pasteurized)  |             |
+| Liquid Egg (Pasteurized)      |             |
+| Milk (Pasteurized)            |             |
+| Milk (Raw)                    |             |
+| Mohair/Cashmere               |             |
+| Shell Eggs (Nest Run)         |             |
+| Shell Eggs (Washed/Sanitized) |             |
+| Shells/Inedible Egg Product   |             |
+| Semen                         |             |
+| Wool                          |             |
 
 #### DiseaseType
 
-| Avian Influenza | |
-| ---------------------------------- | |
-| Bovine Viral Diarrhea Virus | |
-| Brucella abortus | |
-| Brucella canis | |
-| Brucella ovis | |
-| Brucella suis | |
-| Caprine Arthritis and Encephalitis | |
-| Corynebacterium pseudotuberculosis | |
-| Equine Infectious Anemia | |
-| Pseudorabies | |
-| Rabies | |
-| Salmonella pullorum | |
-| Tritrichomonas foetus | |
-| Tuberculosis | |
+| Code                               | Description |
+| ---------------------------------- | ----------- |
+| Avian Influenza                    |             |
+| Bovine Viral Diarrhea Virus        |             |
+| Brucella abortus                   |             |
+| Brucella canis                     |             |
+| Brucella ovis                      |             |
+| Brucella suis                      |             |
+| Caprine Arthritis and Encephalitis |             |
+| Corynebacterium pseudotuberculosis |             |
+| Equine Infectious Anemia           |             |
+| Pseudorabies                       |             |
+| Rabies                             |             |
+| Salmonella pullorum                |             |
+| Tritrichomonas foetus              |             |
+| Tuberculosis                       |             |
 
 #### StateCodeType
 
-| AA  | AE  | AK  | AL  |
-| --- | --- | --- | --- |
-| AP  | AR  | AS  | AZ  |
-| CA  | CO  | CT  | DC  |
-| DE  | FL  | FM  | GA  |
-| GU  | HI  | IA  | ID  |
-| IL  | IN  | KS  | KY  |
-| LA  | MA  | MD  | ME  |
-| MH  | MI  | MN  | MO  |
-| MP  | MS  | MT  | NC  |
-| ND  | NE  | NH  | NJ  |
-| NM  | NV  | NY  | OH  |
-| OK  | OR  | PA  | PR  |
-| PW  | RI  | SC  | SD  |
-| TN  | TX  | UT  | VA  |
-| VI  | VT  | WA  | WI  |
-| WV  | WY  |     |     |
+```
+| AA | AE | AK | AL |
+| AP | AR | AS | AZ |
+| CA | CO | CT | DC |
+| DE | FL | FM | GA |
+| GU | HI | IA | ID |
+| IL | IN | KS | KY |
+| LA | MA | MD | ME |
+| MH | MI | MN | MO |
+| MP | MS | MT | NC |
+| ND | NE | NH | NJ |
+| NM | NV | NY | OH |
+| OK | OR | PA | PR |
+| PW | RI | SC | SD |
+| TN | TX | UT | VA |
+| VI | VT | WA | WI |
+| WV | WY |
+```
 
 To save space most postal codes are left self-explanatory. The others
 are territories such as GU Guam, MP Northern Mariana Islands, MH
@@ -3530,18 +3543,20 @@ https://faq.usps.com/s/article/What-are-the-USPS-abbreviations-for-U-S-states-an
 
 #### PhotoView
 
-| Left | |
-| ----- | |
-| Front | |
-| Right | |
+| Code  | Description |
+| ----- | ----------- |
+| Left  |             |
+| Front |             |
+| Right |             |
 
 #### ApprovalListType
 
 These are used only in the generic Movement root element to support
 movement on NPIP forms. They are not found in the original eCVI.
 
-| NPIPParticipation  | Flocks or owners participate in NPIP and receive an NPIP-specific number                                                                               |
+| Code               | Description                                                                                                                                            |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| NPIPParticipation  | Flocks or owners participate in NPIP and receive an NPIP-specific number                                                                               |
 | NPIPClassification | Flocks can be classified as clean or monitored for various diseases based on frequency of testing. See NPIP documentation for list of classifications. |
 
 # Transmission and Other NASAHO Requirements
