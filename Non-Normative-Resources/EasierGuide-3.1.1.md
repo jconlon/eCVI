@@ -325,7 +325,7 @@ Laboratory Diagnosticians (AAVLD) and the United States Animal Health
 Association (USAHA), created a subcommittee—now called a working
 group—to develop a standard for transmission of eCVI data. This
 working group follows the American National Standards Institute (ANSI)
-requirements for standards development. \[1\] It uses an open,
+requirements for standards development. [^1] It uses an open,
 industry-driven, consensus standard development process. Development of
 the standard has involved active participation, and leadership, from
 both eCVI and animal health database developers as well as state and
@@ -2189,7 +2189,7 @@ units. Schema language does not enforce this requirement, but it would
 make no sense to send something like “14.5” without telling what that
 measured.
 
-`Age` is the `AgeType` the same as we saw in `Animal`. Because this applies to
+The `Age` attribute is the `AgeType` the same as we saw in `Animal`. Because this applies to
 the entire group, if all animals on the CVI are not the same age, to the
 precision in the age units, then multiple `GroupLot` elements will be
 needed. This can often be handled by using the inequality symbol for
@@ -4200,7 +4200,7 @@ general purposes:
     may lessen the subsequent need to inquire beyond the face of a
     document. Negotiable instruments, for example, rely upon formal
     requirements, including a signature, for their ability to change
-    hands with ease, rapidity, and minimal interruption."\[3\]
+    hands with ease, rapidity, and minimal interruption."[^3]
 
 Pen and ink signatures have generally been accepted for these purposes
 largely due to the difficulty involved in creating a “copy” of a
@@ -4208,7 +4208,7 @@ signature or of altering the document after it has been signed without
 the alteration being apparent. These traditional signatures depend upon
 the biometric aspects of an individual's handwriting as well as chemical
 properties of ink and paper to make technical assessment of originality
-reasonably trustworthy.\[4\] In the case of an individual who cannot
+reasonably trustworthy.[^4] In the case of an individual who cannot
 write his or her name, an X is often used to sign documents. In this
 case handwriting analysis cannot be used to authenticate the signer.
 Instead, the signature is witnessed to verify that the X was written by
@@ -4223,7 +4223,7 @@ The Electronic Signatures in Global and National Commerce Act (E-SIGN)
 defines an electronic signature: “The term 'electronic signature' means
 an electronic sound, symbol, or process, attached to or logically
 associated with a contract or other record and executed or adopted by a
-person with the intent to sign the record."\[5\] This definition leaves
+person with the intent to sign the record."[^5] This definition leaves
 the details of how the signature should be “attached or logically
 associated” completely open for the parties to the contract or record to
 define. Just as a pen and ink signature is associated with a document by
@@ -4246,7 +4246,7 @@ deficient in other respects. For example, if there are reasons to doubt
 that it was actually the electronic signature holder who affixed the
 signature in question, a court might not accept the electronic
 signature, just as it might decline to accept a paper signature that
-could not be verified.”\[6\]
+could not be verified.”[^6]
 
 The DOJ goes on to list attributes of an electronic signature. This list
 or variations of the same have been widely quoted throughout the
@@ -4264,7 +4264,7 @@ electronic signatures that are:
     the signature
 
 "The degree to which these attributes are necessary depends on the risks
-of the particular transaction.” \[7\]
+of the particular transaction.” [^7]
 
 ### Electronic Signature Requirements
 
@@ -4367,7 +4367,7 @@ that to assume that Alice entered that key into the computer at the time
 of signing. But it is a much larger step to assume that Alice intended a
 particular document to be signed. And without a tamperproof computer
 trusted by Alice, you can expect ‘digital signature experts’ to show up
-in court contesting a lot of digital signatures.”\[8\]
+in court contesting a lot of digital signatures.”[^8]
 
 #### Risk Assessment:
 
@@ -4430,10 +4430,10 @@ key. Each user possesses a private and public key pair. Public keys are
 assumed to be known to the public in general. Private keys are never
 shared. Anyone can verify the signature of a user by employing that
 user's public key. Signature generation can be performed only by the
-possessor of the user’s private key.”\[9\] The 1998 version of the DSS
+possessor of the user’s private key.”[^9] The 1998 version of the DSS
 lists two algorithms for creation of digital signatures, DSA and RSA.
 Other algorithms, such as elliptic curves are emerging that also fit the
-definition.\[10\]
+definition.[^10]
 
 Digital signatures are widely held to be the technically best form of
 electronic signature. In fact, many analyses begin with the assumption
@@ -4447,10 +4447,10 @@ electronic signature standards in the banking, electronic mail, and
 business sectors address only digital signature systems, this standard
 acknowledges the efforts of industry and systems integrators to achieve
 authentication with other methods. Therefore, this standard will not be
-restricted to a single technology.”\[11\] But it then goes on to discuss
+restricted to a single technology.”[^11] But it then goes on to discuss
 the implementation of digital signatures as the only technology
 currently available to meet all the stated requirements. Biometrics are
-discussed as providing many of the requirements.\[12\]
+discussed as providing many of the requirements.[^12]
 
 The Office of Management and Budget (OMB) uses a similar approach to
 technology neutrality in its guidance on implementation of the
@@ -4464,7 +4464,7 @@ only technology available that can foster interoperability across
 numerous applications. There are, however, applications where personal
 identification numbers (PINs) and other shared secret techniques may
 well be appropriate. These are generally relatively low risk
-applications where interoperability is of lesser importance.”\[13\]
+applications where interoperability is of lesser importance.”[^13]
 
 #### Digital Signature:
 
@@ -4650,60 +4650,16 @@ assessment. Appropriate industry standards will help improve the
 availability and interoperability of workable electronic signature
 solutions.
 
-[^1]:
-    It is not, however, an ANSI accredited standards development
-    organization.
-
-[^2]:
-    Standards for the Internet started out as “Requests For Comment”
-    back in its experimental days and the acronym RFC stuck.
-
-[^3]:
-    Information Security Committee Electronic Commerce and Information
-    Technology Division Section of Science and Technology American Bar
-    Association, _Digital Signature Guidelines; Legal Infrastructure for
-    Certification Authorities and Secure Electronic Commerce_, American
-    Bar Association, 1996, pp 4-6.
-
-4.  <sup>\*\*\*</sup> Not all societies follow the same conventions. In
-    Japan, for example, a handwritten signature does not carry legal
-    status. To legally sign a document, an individual must obtain and
-    register a "Han" stamp. This intricately carved stamp is made from
-    the end grain of a small piece of bamboo. The combination of the
-    grain of the wood and the carving make each stamp unique and
-    unduplicatable. Thus, the ability to apply a legally binding
-    signature depends, in Japan, on possession of a specific item, the
-    individual’s stamp. These stamps are very closely guarded personal
-    possessions.
-
-5.  _Electronic Signatures in Global and National Commerce Act_, Sec
-    106, (5).
-
-6.  U.S. Department of Justice, _Legal Considerations In Designing And
-    Implementing Electronic Processes: A Guide For Federal Agencies_,
-    November 2000, p19.
-
-7.  ibid. p35.
-
-8.  Schneier, B, “Why Digital Signatures Are Not Signatures”,
-    Crypto-Gram, November 15, 2000, Counterpane Internet Security, Inc.,
-
-9.  U.S. Department Of Commerce/National Institute of Standards and
-    Technology, _Digital Signature Standard (DSS)_, Federal Information
-    Processing Standards Publication 186-1, 1998 December 15, p 1.
-
-10. <sup></sup> 2024 additional note: The advent of quantum computing
-    has the computer security community, including the National
-    Institute of Standards and Technology (NIST) working to develop
-    newer, “quantum resistant” algorithms such as those based on
-    multi-dimensional latices.
-
-11. American Society For Testing And Materials, _Standard Guide for
-    Electronic Authentication of Health Care Information_, E1762, p 3.
-
-12. ibid. pp 8-13.
-
-13. Office Of Management And Budget, _Implementation of the Government
-    Paperwork Elimination Act_, available at
-    http://clinton4.nara.gov/OMB/fedreg/gpea2.html. (Now at:
-    https://obamawhitehouse.archives.gov/omb/fedreg\_gpea2/)
+[^1]: It is not, however, an ANSI accredited standards development organization.
+[^2]: Standards for the Internet started out as “Requests For Comment” back in its experimental days and the acronym RFC stuck.
+[^3]: Information Security Committee Electronic Commerce and Information Technology Division Section of Science and Technology American Bar Association, _Digital Signature Guidelines; Legal Infrastructure for Certification Authorities and Secure Electronic Commerce_, American Bar Association, 1996, pp 4-6.
+[^4]: Not all societies follow the same conventions. In Japan, for example, a handwritten signature does not carry legal status. To legally sign a document, an individual must obtain and register a "Han" stamp. This intricately carved stamp is made from the end grain of a small piece of bamboo. The combination of the grain of the wood and the carving make each stamp unique and unduplicatable. Thus, the ability to apply a legally binding signature depends, in Japan, on possession of a specific item, the individual’s stamp. These stamps are very closely guarded personal possessions.
+[^5]: _Electronic Signatures in Global and National Commerce Act_, Sec 106, (5).
+[^6]: U.S. Department of Justice, _Legal Considerations In Designing And Implementing Electronic Processes: A Guide For Federal Agencies_, November 2000, p19.
+[^7]: ibid. p35.
+[^8]: Schneier, B, “Why Digital Signatures Are Not Signatures”, Crypto-Gram, November 15, 2000, Counterpane Internet Security, Inc.
+[^9]: U.S. Department Of Commerce/National Institute of Standards and Technology, _Digital Signature Standard (DSS)_, Federal Information Processing Standards Publication 186-1, 1998 December 15, p 1.
+[^10]: 2024 additional note: The advent of quantum computing has the computer security community, including the National Institute of Standards and Technology (NIST) working to develop newer, “quantum resistant” algorithms such as those based on multi-dimensional latices.
+[^11]: American Society For Testing And Materials, _Standard Guide for Electronic Authentication of Health Care Information_, E1762, p 3.
+[^12]: ibid. pp 8-13.
+[^13]: Office Of Management And Budget, _Implementation of the Government Paperwork Elimination Act_, available at http://clinton4.nara.gov/OMB/fedreg/gpea2.html. (Now at: https://obamawhitehouse.archives.gov/omb/fedreg_gpea2/)
