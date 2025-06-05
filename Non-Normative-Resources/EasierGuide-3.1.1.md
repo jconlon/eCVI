@@ -3594,10 +3594,10 @@ One data requirement of the NASAHO committee does not have a specific
 field in the standard XML. The total number of animals covered by the
 ICVI must be included. This is not included in any one data item in the
 standard because it should, if all elements are correctly implemented,
-but computable from individual Animal, and GroupLot elements.
+but computable from individual `Animal`, and `GroupLot` elements.
 
 Both inspection date and issue date are required by the committee. This
-would, presumably, make the InspectionDate attribute of GroupLot
+would, presumably, make the `InspectionDate` attribute of `GroupLot`
 required even though it is optional in the schema. Breed, sex, and age
 are also required by the committee but optional in the schema. These
 differences may be to allow for the very rare exceptions that the
@@ -3704,7 +3704,7 @@ everything, I will focus specifically on the differences from the eCVI.
 
 ## Movement
 
-The Movement document type supports documentation of animal and animal
+The `Movement` document type supports documentation of animal and animal
 product movements that fall under regulatory oversight, but that do not
 require the participation of a named veterinarian. This was motivated by
 two main use-cases. The USDA animal disease traceability rules allow
@@ -3718,30 +3718,30 @@ facilities to take place without individual veterinary inspection using
 forms approved by the NPIP and based on participation in an NPIP
 program.
 
-Other than the absence of a Veterinarian element, the Movement element
-is very nearly identical to the eCVI element. The only minor changes to
+Other than the absence of a `Veterinarian` element, the `Movement` element
+is very nearly identical to the `eCVI` element. The only minor changes to
 reflect the nature of “alternative movement documents.” The attributes
-CviNumber and CviNumberIssuedBy are simply renamed to MovementId and
-MovementIdIssuedBy.
+`CviNumber` and `CviNumberIssuedBy` are simply renamed to `MovementId` and
+MovementI`dIssuedBy.
 
 ### NPIP Movements
 
 One of the important use-cases for the generic movement document is
 support for electronic NPIP 9-3 movements. A few details are specific to
-this use. The MovementId is generated algorithmically from the source
+this use. The `MovementId` is generated algorithmically from the source
 flock’s NPIP participant number. These are issued serially for each
 flock. The movement Id ends up being SS-FFF-123 where SS is the state
 postal code, FFF is the state issued unique participant identifier and
 123 is a number that increases by one for each shipment. Because the
-number is based on an NPIP algorithm, the MovementIdIssuedBy should be
+number is based on an NPIP algorithm, the `MovementIdIssuedBy` should be
 “NPIP.”
 
-The key addition in Movement is a new element named Approval based on
-the type ApprovalType. This consists of a Type and Date of the approval
+The key addition in `Movement` is a new element named `Approval` based on
+the type `ApprovalType`. This consists of a `Type` and `Date` of the approval
 as required attributes and a Person element to hold one or more
 regulatory authorities that approved the movement. There are currently
-only two defined approval types: NPIPParticipation and
-NPIPClassification. These differ based on the various National Poultry
+only two defined approval types: `NPIPParticipation` and
+`NPIPClassification`. These differ based on the various National Poultry
 Improvement Plan programs that allow movement of birds and eggs on NPIP
 form 9-3 instead of an ICVI.
 
@@ -3754,11 +3754,11 @@ processing purposes. Having these data in a format that is compatible
 with the eCVI will, hopefully, improve data interoperability and
 management efficiency.
 
-Sighting is even simpler than eCVI or Movement. A simple xs:string
-attribute identifies the SightingType. The SightingDate attribute is
-optional as is the SourceSystem that is similar to the
-CviNumberIssuedBy. There is only a single Location PremType element
-rather than separate Origin and Destination. And Sighting only applies
+`Sighting` is even simpler than `eCVI` or `Movement`. A simple `xs:string`
+attribute identifies the `SightingType`. The `SightingDate` attribute is
+optional as is the `SourceSystem` that is similar to the
+`CviNumberIssuedBy`. There is only a single `Location` `PremType` element
+rather than separate `Origin` and `Destination`. And `Sighting` only applies
 to one or more individual Animals.
 
 # Suggestions on Software Development Practices
@@ -3815,9 +3815,9 @@ important to learn early in the process when you need to account for
 them and when the software is doing so. XML encoding software such as
 programming languages often do the entity encoding and decoding for you.
 Good, so what is the issue? If you aren’t on the same page with your
-software you can end up with goofy things like \&amp;lt; or worse. For
-an example in pseudocode: if(mystring equals xmlelement.getText()…)
-would the entity have been resolved in getText() or does the calling
+software you can end up with goofy things like `&amp;lt;` or worse. For
+an example in pseudocode: `if(mystring equals xmlelement.getText()…)`
+would the entity have been resolved in `getText()` or does the calling
 method need to account for that? Be sure to check your entity characters
 early in your development process and at each stage of encoding and
 decoding your data.
@@ -3842,7 +3842,7 @@ check, it comes too late in the process to be user-friendly. Only at the
 point of data-entry does the software have the opportunity to help the
 user do it right the first time rather than just catching their mistake
 later. The standard schema has many features designed to help with this.
-Take the AnimalTags element for one example. The regular expressions
+Take the `AnimalTags` element for one example. The regular expressions
 that define the tag types can be used to provide immediate feedback on
 things like AINs that are too long or too short. This is a _very_ common
 error that is very easy to check and correct if done at the point the
@@ -3858,8 +3858,8 @@ everything entered up to the current field. Incorporating an
 understanding of conditionality into the workflow will give the software
 a chance to check the value being entered against requirements for that
 specific movement. For example, if the species has already been entered
-and the CVI is for a horse, the Accession and Test for the Coggins test
-can appear as required. Or if the veterinarian tries to enter a GroupLot
+and the CVI is for a horse, the `Accession` and `Test` for the Coggins test
+can appear as required. Or if the veterinarian tries to enter a `GroupLot`
 of one year old heifers, the software could remind them that they will
 need official identification for each animal. Nothing says that the
 program cannot help the veterinarian enter all the common data once and
@@ -3998,9 +3998,7 @@ Step 3: Calculate
 > 0).  
 > a<sub>(n-j+1)</sub> is value of a character in the string.
 
-Step 4: The check digit a1 must be computed so that Sn<sub>||36</sub> =
-
-1.
+Step 4: The check digit a1 must be computed so that Sn<sub>||36</sub> =1.
 
 Step 5: Use Table 1 to select the Check Character.
 
@@ -4048,6 +4046,7 @@ error handling, etc. This version simply checks a PIN for a valid check
 digit. This uses nothing very Java-specific, the code is almost
 identical in C\# and similar in Python, etc.
 
+```java
 public class PremIDCheckSum {
 
 private static char\[\] char36 =
@@ -4175,6 +4174,7 @@ e.printStackTrace();
 }
 
 }
+```
 
 ## B: Electronic Signature Considerations
 
