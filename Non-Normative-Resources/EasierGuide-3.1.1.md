@@ -1225,7 +1225,7 @@ only once.
 <eCVI . . . >
   <Veterinarian . . . > . . . </Veterinarian>
   <MovementPurposes> . . . </MovementPurposes>
-  <Origin > . . . </Origin>
+  <Origin> . . . </Origin>
   <Destination > . . . </Destination>
 ```
 
@@ -1355,7 +1355,7 @@ would be no point to the CVI.
     <Accession . . . > . . . </Accession>
   </Accessions>
   <Animal . . . > . . . </Animal>
-  < GroupLot . . . > . . . </ GroupLot >
+  <GroupLot . . . > . . . </GroupLot>
   <Animal . . . > . . . </Animal>
   <Product . . . > . . . </Product>
 ```
@@ -1442,9 +1442,9 @@ completely not human-readable.
   <Statements> Animals have not been exposed to kryptonite </Statements>
   <Attachment . . . />
   <Attachment . . . />
-  <MiscAttribute Name = " ShipmentWeight " Value = " 105tons " />
-  <MiscAttribute Name = " MaxSpeed " Value = " mac4 " />
-  <Binary . . . ">
+  <MiscAttribute Name = "ShipmentWeight " Value = " 105tons " />
+  <MiscAttribute Name = "MaxSpeed " Value = " mac4 " />
+  <Binary . . . >
    . . .
    </Binary>
  </eCVI>
@@ -1921,7 +1921,7 @@ element, `Consignor` or `Consignee`.
 ```
 
 ```xml
-Origin>
+<Origin>
 <PremId> 003EZUN </PremId>
 <PremName> SomeFarm Home Place </PremName>
 <Address>
@@ -2009,7 +2009,7 @@ simple string attribute Status.
 ```
 
 ```xml
-< Origin>
+<Origin>
   <PremId> 003EZUN </PremId>
   <PremName> SomeFarm Home Place </PremName>
   <Address>
@@ -3982,7 +3982,7 @@ Step 1: Set a<sub>j</sub> for j=n...2 as follows:
 > a<sub>n-1</sub> is the value for the second character of the
 > identifier;  
 > ...
-
+Animals have not been exposed to kryptonite
 Step 2: Set j=1 and P1=36
 
 Step 3: Calculate
